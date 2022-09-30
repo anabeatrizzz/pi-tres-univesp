@@ -54,6 +54,17 @@ app.get("/users",(req,res) => {
 
 app.get("/novidades",(req,res) =>{
     res.json(DB.novidades);
+});
+
+app.post("/novidades", (req,res) => {
+    let {titulo,descricao} = req.body;
+    DB.novidades.push({
+        id:4,
+        titulo,
+        descricao
+    });
+
+    res.sendStatus(201);
 })
 app.listen(8081, () => {
     console.log("API RODANDO COM SUCESSO")
