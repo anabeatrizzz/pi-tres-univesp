@@ -1,9 +1,9 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const bodyParser = require("body-parser");
+import { urlencoded, json } from "body-parser";
 
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
+app.use(urlencoded({extended:false}));
+app.use(json());
 
 var DB = {
     users: [
