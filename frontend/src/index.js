@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App.tsx';
+import Initial from "./pages/initial"
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -12,7 +12,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Initial />,
   },
 ]);
 
