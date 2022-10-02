@@ -1,36 +1,67 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import colors from "../colors";
 import styles from "./Header.css"
+import characterBackground from "../../assets/pictureGamer.png"
+import rpgName from "../../assets/crescente20Rpg.png"
 
-export default function Header(){
-  return(
-    <header style={styles.header}>
-      <nav style={styles.nav}>
-        <div style={styles.navDiv}>
-          <ul style={styles.ul}>
-            <NavLink style={styles.navLink} to="/">
-              <li style={styles.li}>
+function setNavLinkActive(isActive: boolean) {
+  if (!isActive) {
+    return styles.navLink
+  } else {
+    return { ...styles.navLink, ...styles.navLinkActive }
+  }
+}
+
+export default function Header() {
+  return (
+    <>
+      <img
+        src={rpgName}
+        style={{ width: "30%" }}
+        alt="imagem com o nome do RPG Crescente vinte"
+      />
+      <header style={styles.header}>
+
+        <nav>
+          <div style={styles.navDiv}>
+            <ul style={styles.ul}>
+              <NavLink
+                style={({ isActive }) => setNavLinkActive(isActive)}
+                to="/"
+              >
                 INÍCIO
-              </li>
-            </NavLink>
-            <NavLink style={styles.navLink} to="/sistema">
-              <li style={styles.li}>
+              </NavLink>
+              <NavLink
+                style={({ isActive }) => setNavLinkActive(isActive)}
+                to="/sistema"
+              >
                 SISTEMA
-              </li>
-            </NavLink>
-            <NavLink style={styles.navLink} to="/lore">
-              <li style={styles.li}>
+              </NavLink>
+              <NavLink
+                style={({ isActive }) => setNavLinkActive(isActive)}
+                to="/lore"
+              >
                 LORE
-              </li>
-            </NavLink>
-            <NavLink style={styles.navLink} to="/jogo">
-              <li style={styles.li}>
+              </NavLink>
+              <NavLink
+                style={({ isActive }) => setNavLinkActive(isActive)}
+                to="/jogo"
+              >
                 JOGO
-              </li>
-            </NavLink>
-          </ul>
-        </div>
-      </nav>
-    </header>
+              </NavLink>
+            </ul>
+          </div>
+        </nav>
+
+      </header>
+      <Link style={styles.characterBackgroundDiv} to="/link">
+        <img
+          src={characterBackground}
+          style={styles.characterBackgroundImg}
+          alt="imagem para fundo do personagem"
+        />
+      </Link>
+    </>
   )
 }

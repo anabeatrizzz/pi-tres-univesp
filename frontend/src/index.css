@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #401B22;
+}
+
+@font-face {
+  font-family: 'Griffy';
+  src: local('Griffy'), url(./fonts/Griffy/Griffy-Regular.ttf) format('truetype');
+}
