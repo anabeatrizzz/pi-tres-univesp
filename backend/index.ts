@@ -1,7 +1,9 @@
 import express from "express";
+import cors from "cors"
 const app = express();
 import { urlencoded, json } from "body-parser";
 
+app.use(cors());
 app.use(urlencoded({extended:false}));
 app.use(json());
 

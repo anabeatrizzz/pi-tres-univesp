@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import colors from "../colors";
 import styles from "./Header.css"
 import characterBackground from "../../assets/pictureGamer.png"
 import rpgName from "../../assets/crescente20Rpg.png"
@@ -16,9 +15,7 @@ function setNavLinkActive(isActive: boolean) {
 export default function Header() {
   return (
     <>
-
       <header style={styles.header}>
-
         <nav>
           <div style={styles.navDiv}>
             <ul style={styles.ul}>
@@ -49,7 +46,6 @@ export default function Header() {
             </ul>
           </div>
         </nav>
-
       </header>
       <Link style={styles.characterBackgroundDiv} to="/link">
         <img
