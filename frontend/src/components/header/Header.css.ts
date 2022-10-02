@@ -34,6 +34,11 @@ const styles = {
     paddingRight: 20
   },
 
+  subNavLink: {
+    textDecoration: 'none',
+    color: 'black',
+  },
+
   navLinkActive: {
     color: 'white',
     background: colors.red
@@ -55,6 +60,15 @@ const styles = {
     zIndex: 1,
     position: "fixed" as "fixed",
     top: 0
+  },
+
+  menuItem: {
+    fontFamily: "Griffy",
+    fontSize: 25
+  },
+
+  menu: {
+    backgroundColor: colors.yellow
   }
 }
 
