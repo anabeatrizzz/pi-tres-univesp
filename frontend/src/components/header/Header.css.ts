@@ -6,6 +6,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    marginTop: "7%",
     background: colors.yellow
   },
 
@@ -41,7 +42,6 @@ const styles = {
   ul: {
     display: 'flex',
     listStyle: 'none',
-    //justifyContent: "center",
     alignItems: "center",
   },
 
@@ -51,7 +51,7 @@ const styles = {
   },
 
   characterBackgroundImg: {
-    width: "40%",
+    width: "35%",
     zIndex: 1,
     position: "fixed" as "fixed",
     top: 0

@@ -16,11 +16,7 @@ function setNavLinkActive(isActive: boolean) {
 export default function Header() {
   return (
     <>
-      <img
-        src={rpgName}
-        style={{ width: "30%" }}
-        alt="imagem com o nome do RPG Crescente vinte"
-      />
+
       <header style={styles.header}>
 
         <nav>
@@ -60,6 +56,19 @@ export default function Header() {
           src={characterBackground}
           style={styles.characterBackgroundImg}
           alt="imagem para fundo do personagem"
+        />
+      </Link>
+
+      <Link style={{ justifyContent: "flex-start", display: "flex" }} to="/">
+        <img
+          src={rpgName}
+          style={{
+            width: "30%",
+            zIndex: 2,
+            position: "fixed" as "fixed",
+            top: 0
+          }}
+          alt="imagem com o nome do RPG Crescente vinte"
         />
       </Link>
     </>
