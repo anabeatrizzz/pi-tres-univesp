@@ -69,7 +69,21 @@ const styles = {
 
   menu: {
     backgroundColor: colors.yellow
+  },
+
+  firstImg: {
+    width: "30%",
+    zIndex: 2,
+    position: "fixed" as "fixed",
+    top: 0,
+  },
+
+  firstImgLink: {
+    justifyContent: "flex-start",
+    display: "flex"
   }
+
+
 }
 
 export default styles;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,6 +16,34 @@ function setNavLinkActive(isActive: boolean) {
 }
 
 export default function Header() {
+  const [displayFirstImg, setDisplayFirstImg] = useState("initial")
+  const [displaySecondImg, setDisplaySecondImg] = useState("initial")
+
+  useEffect(() => {
+    const listenToScroll = () => {
+      let heightToHideFirstImageFrom = 10;
+      let heightToHideSecondImageFrom = 50;
+
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+         
+      if (winScroll > heightToHideFirstImageFrom) { 
+        displayFirstImg === "initial" && setDisplayFirstImg("none");
+      } else {
+        setDisplayFirstImg("initial");
+      }
+
+      if (winScroll > heightToHideSecondImageFrom) { 
+        displaySecondImg === "initial" && setDisplaySecondImg("none");
+      } else {
+        setDisplaySecondImg("initial");
+      }
+    };
+
+    window.addEventListener("scroll", listenToScroll);
+    return () =>
+      window.removeEventListener("scroll", listenToScroll);
+  }, [])
+
   return (
     <>
       <header style={styles.header}>
@@ -110,12 +138,12 @@ export default function Header() {
                           divider
                           style={styles.menuItem}
                           onClick={popupState.close}>
-                            <NavLink
-                              style={styles.subNavLink}
-                              to="/regras"
-                            >
-                              Regras
-                            </NavLink>
+                          <NavLink
+                            style={styles.subNavLink}
+                            to="/regras"
+                          >
+                            Regras
+                          </NavLink>
                         </MenuItem>
                       </Menu>
                     </>
@@ -140,23 +168,18 @@ export default function Header() {
           </div>
         </nav>
       </header>
-      <Link style={styles.characterBackgroundDiv} to="/link">
+      <Link style={styles.characterBackgroundDiv} to="/login">
         <img
           src={characterBackground}
-          style={styles.characterBackgroundImg}
+          style={{ ...styles.characterBackgroundImg, display: displaySecondImg,  }}
           alt="imagem para fundo do personagem"
         />
       </Link>
 
-      <Link style={{ justifyContent: "flex-start", display: "flex" }} to="/">
+      <Link style={styles.firstImgLink} to="/">
         <img
           src={rpgName}
-          style={{
-            width: "30%",
-            zIndex: 2,
-            position: "fixed" as "fixed",
-            top: 0
-          }}
+          style={{ ...styles.firstImg, display: displayFirstImg }}
           alt="imagem com o nome do RPG Crescente vinte"
         />
       </Link>
