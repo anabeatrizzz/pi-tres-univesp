@@ -25,14 +25,14 @@ export default function Header() {
       let heightToHideSecondImageFrom = 50;
 
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-         
-      if (winScroll > heightToHideFirstImageFrom) { 
+
+      if (winScroll > heightToHideFirstImageFrom) {
         displayFirstImg === "initial" && setDisplayFirstImg("none");
       } else {
         setDisplayFirstImg("initial");
       }
 
-      if (winScroll > heightToHideSecondImageFrom) { 
+      if (winScroll > heightToHideSecondImageFrom) {
         displaySecondImg === "initial" && setDisplaySecondImg("none");
       } else {
         setDisplaySecondImg("initial");
@@ -56,7 +56,7 @@ export default function Header() {
               >
                 INÍCIO
               </NavLink>
-              <PopupState variant="popover">
+              <PopupState disableAutoFocus popupId="mainSystemMenu" variant="popover">
                 {
                   (popupState) => (
                     <>
@@ -68,7 +68,7 @@ export default function Header() {
                         SISTEMA
                       </NavLink>
                       <Menu {...bindMenu(popupState)}>
-                        <PopupState variant="popover">
+                        <PopupState disableAutoFocus popupId="mainRacesMenu" variant="popover">
                           {
                             (popupState) => (
                               <>
@@ -80,7 +80,14 @@ export default function Header() {
                                   Raças
                                 </MenuItem>
 
-                                <Menu {...bindMenu(popupState)}>
+                                <Menu anchorOrigin={{
+                                  vertical: 'center',
+                                  horizontal: 'right',
+                                }}
+                                  transformOrigin={{
+                                    vertical: 'center',
+                                    horizontal: 'left',
+                                  }} {...bindMenu(popupState)}>
                                   <MenuItem
                                     style={styles.menuItem}
                                     onClick={popupState.close}
@@ -88,13 +95,20 @@ export default function Header() {
                                   >
                                     Raça 1
                                   </MenuItem>
+                                  <MenuItem
+                                    style={styles.menuItem}
+                                    onClick={popupState.close}
+                                    divider
+                                  >
+                                    Raça 2
+                                  </MenuItem>
                                 </Menu>
                               </>
                             )
                           }
                         </PopupState>
 
-                        <PopupState variant="popover">
+                        <PopupState disableAutoFocus popupId="mainClassesMenu" variant="popover">
                           {
                             (popupState) => (
                               <>
@@ -106,13 +120,27 @@ export default function Header() {
                                   Classes
                                 </MenuItem>
 
-                                <Menu {...bindMenu(popupState)}>
+                                <Menu anchorOrigin={{
+                                  vertical: 'center',
+                                  horizontal: 'right',
+                                }}
+                                  transformOrigin={{
+                                    vertical: 'center',
+                                    horizontal: 'left',
+                                  }} {...bindMenu(popupState)}>
                                   <MenuItem
                                     style={styles.menuItem}
                                     onClick={popupState.close}
                                     divider
                                   >
                                     Classe 1
+                                  </MenuItem>
+                                  <MenuItem
+                                    style={styles.menuItem}
+                                    onClick={popupState.close}
+                                    divider
+                                  >
+                                    Classe 2
                                   </MenuItem>
                                 </Menu>
                               </>
@@ -171,7 +199,7 @@ export default function Header() {
       <Link style={styles.characterBackgroundDiv} to="/login">
         <img
           src={characterBackground}
-          style={{ ...styles.characterBackgroundImg, display: displaySecondImg,  }}
+          style={{ ...styles.characterBackgroundImg, display: displaySecondImg, }}
           alt="imagem para fundo do personagem"
         />
       </Link>
