@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Initial from "./pages/initial"
+import Login from "./pages/login";
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Initial />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
