@@ -67,7 +67,7 @@ export default function Header() {
                       >
                         SISTEMA
                       </NavLink>
-                      <Menu {...bindMenu(popupState)}>
+                      <Menu disableScrollLock={true} {...bindMenu(popupState)}>
                         <PopupState disableAutoFocus popupId="mainRacesMenu" variant="popover">
                           {
                             (popupState) => (

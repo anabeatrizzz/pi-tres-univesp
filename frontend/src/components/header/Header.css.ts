@@ -56,7 +56,7 @@ const styles = {
   },
 
   characterBackgroundImg: {
-    width: "35%",
+    width: "25%",
     zIndex: 1,
     position: "fixed" as "fixed",
     top: 0
