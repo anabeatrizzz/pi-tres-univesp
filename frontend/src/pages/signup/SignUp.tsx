@@ -1,16 +1,18 @@
-import Paper from "@mui/material/Paper"
-import Typography from "@mui/material/Typography"
-import React from "react"
-import Wrapper from "../../components/wrapper/Wrapper"
-import { Card, CardActions, CardContent } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import styles from "./Login.css";
-import { useFormik } from 'formik';
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { validationSchema, initialValues } from "../../formik/Login";
+import Wrapper from "../../components/wrapper/Wrapper";
+import styles from "./SignUp.css";
+import { useFormik } from 'formik';
+import { validationSchema, initialValues } from "../../formik/SignUp";
 
-export default function Login() {
+export default function SignUp(){
   const navigate = useNavigate()
   const formik = useFormik({
     initialValues,
@@ -21,7 +23,7 @@ export default function Login() {
   return (
     <Wrapper>
       <Paper style={styles.paper} square elevation={0}>
-        <Typography gutterBottom variant="h4" style={styles.headingFour}>LOGIN</Typography>
+        <Typography gutterBottom variant="h4" style={styles.headingFour}>CADASTRO</Typography>
         <Card sx={{ maxWidth: 590 }} style={styles.card}>
           <CardContent style={styles.cardContent}>
             <form style={styles.divInputs} noValidate onSubmit={formik.handleSubmit}>
@@ -65,12 +67,12 @@ export default function Login() {
 
               <CardActions style={styles.cardActions} disableSpacing>
                 <Button type="submit" style={styles.loginBtn} variant="contained">
-                  <Typography style={styles.loginTxt}>Entrar</Typography>
+                  <Typography style={styles.loginTxt}>Registrar</Typography>
                 </Button>
               </CardActions>
 
               <Typography mt={3}>
-              Não possui uma conta? Faça seu <Link style={styles.link} to="/cadastro">cadastro</Link>
+              Já possui uma conta? Faça o <Link style={styles.link} to="/login">login</Link>
             </Typography>
             </form>
             
