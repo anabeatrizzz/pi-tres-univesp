@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Initial from "./pages/initial"
 import Login from "./pages/login";
+import SignUp from "./pages/signup";
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/cadastro",
+    element: <SignUp />
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
