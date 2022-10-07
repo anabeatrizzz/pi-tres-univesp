@@ -4,11 +4,11 @@ import './index.css';
 import Initial from "./pages/initial"
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
+import Skills from "./pages/skills";
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -23,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/cadastro",
     element: <SignUp />
+  },
+  {
+    path: "/skills",
+    element: <Skills />
   }
 ]);
 
