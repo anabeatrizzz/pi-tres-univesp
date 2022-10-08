@@ -8,6 +8,7 @@ import styles from "./Login.css";
 import { useFormik } from 'formik';
 import { Link, useNavigate } from "react-router-dom";
 import { validationSchema, initialValues } from "../../formik/Login";
+import { ROUTES } from "../../navigation/siteRoutes";
 
 export default function Login() {
   const navigate = useNavigate()
@@ -67,7 +68,7 @@ export default function Login() {
             </CardActions>
 
             <Typography mt={3}>
-              Não possui uma conta? Faça seu <Link style={styles.link} to="/cadastro">cadastro</Link>
+              Não possui uma conta? Faça seu <Link style={styles.link} to={ROUTES.SIGNUP}>cadastro</Link>
             </Typography>
           </form>
 

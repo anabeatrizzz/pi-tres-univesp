@@ -81,9 +81,12 @@ const styles = {
   firstImgLink: {
     justifyContent: "flex-start",
     display: "flex"
+  },
+
+  link: {
+    textDecoration: 'none',
+    color: 'black',
   }
-
-
 }
 
 export default styles;

@@ -5,6 +5,10 @@ import Initial from "./pages/initial"
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Skills from "./pages/skills";
+import Rules from "./pages/rules";
+import Class from "./pages/class";
+import Race from "./pages/race";
+import { ROUTES } from "./navigation/siteRoutes";
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -13,20 +17,32 @@ import {
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTES.ROOT,
     element: <Initial />,
   },
   {
-    path: "/login",
+    path: ROUTES.LOGIN,
     element: <Login />,
   },
   {
-    path: "/cadastro",
+    path: ROUTES.SIGNUP,
     element: <SignUp />
   },
   {
-    path: "/skills",
+    path: ROUTES.SKILLS,
     element: <Skills />
+  },
+  {
+    path: ROUTES.RULES,
+    element: <Rules />
+  },
+  {
+    path: ROUTES.RACE,
+    element: <Race />
+  },
+  {
+    path: ROUTES.CLASS,
+    element: <Class />
   }
 ]);
 

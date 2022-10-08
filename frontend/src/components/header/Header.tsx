@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import styles from "./Header.css"
 import characterBackground from "../../assets/pictureGamer.png"
 import rpgName from "../../assets/crescente20Rpg.png"
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import { ROUTES } from "../../navigation/siteRoutes";
 
 function setNavLinkActive(isActive: boolean) {
   if (!isActive) {
@@ -16,6 +17,7 @@ function setNavLinkActive(isActive: boolean) {
 }
 
 export default function Header() {
+  const navigate = useNavigate();
   const [displayFirstImg, setDisplayFirstImg] = useState("initial")
   const [displaySecondImg, setDisplaySecondImg] = useState("initial")
 
@@ -88,20 +90,22 @@ export default function Header() {
                                     vertical: 'center',
                                     horizontal: 'left',
                                   }} {...bindMenu(popupState)}>
-                                  <MenuItem
-                                    style={styles.menuItem}
-                                    onClick={popupState.close}
-                                    divider
-                                  >
-                                    Raça 1
-                                  </MenuItem>
-                                  <MenuItem
-                                    style={styles.menuItem}
-                                    onClick={popupState.close}
-                                    divider
-                                  >
-                                    Raça 2
-                                  </MenuItem>
+                                  {
+                                    Array(3).fill(1).map((_, index) => {
+                                      const linkTo = `/racas/raca${index + 1}`
+                                      return (
+                                        <Link style={styles.link} to={linkTo}>
+                                          <MenuItem
+                                            style={styles.menuItem}
+                                            onClick={popupState.close}
+                                            divider
+                                          >
+                                            Raça {index + 1}
+                                          </MenuItem>
+                                        </Link>
+                                      )
+                                    })
+                                  }
                                 </Menu>
                               </>
                             )
@@ -128,20 +132,22 @@ export default function Header() {
                                     vertical: 'center',
                                     horizontal: 'left',
                                   }} {...bindMenu(popupState)}>
-                                  <MenuItem
-                                    style={styles.menuItem}
-                                    onClick={popupState.close}
-                                    divider
-                                  >
-                                    Classe 1
-                                  </MenuItem>
-                                  <MenuItem
-                                    style={styles.menuItem}
-                                    onClick={popupState.close}
-                                    divider
-                                  >
-                                    Classe 2
-                                  </MenuItem>
+                                  {
+                                    Array(3).fill(1).map((_, index) => {
+                                      const linkTo = `/classes/classe${index + 1}`
+                                      return (
+                                        <Link style={styles.link} to={linkTo}>
+                                          <MenuItem
+                                            style={styles.menuItem}
+                                            onClick={popupState.close}
+                                            divider
+                                          >
+                                            Classe {index + 1}
+                                          </MenuItem>
+                                        </Link>
+                                      )
+                                    })
+                                  }
                                 </Menu>
                               </>
                             )
@@ -196,7 +202,7 @@ export default function Header() {
           </div>
         </nav>
       </header>
-      <Link style={styles.characterBackgroundDiv} to="/login">
+      <Link style={styles.characterBackgroundDiv} to={ROUTES.LOGIN}>
         <img
           src={characterBackground}
           style={{ ...styles.characterBackgroundImg, display: displaySecondImg, }}
@@ -204,7 +210,7 @@ export default function Header() {
         />
       </Link>
 
-      <Link style={styles.firstImgLink} to="/">
+      <Link style={styles.firstImgLink} to={ROUTES.ROOT}>
         <img
           src={rpgName}
           style={{ ...styles.firstImg, display: displayFirstImg }}
