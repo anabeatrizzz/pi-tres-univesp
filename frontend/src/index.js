@@ -5,6 +5,7 @@ import Initial from "./pages/initial"
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Skills from "./pages/skills";
+import Rules from "./pages/rules";
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -27,6 +28,13 @@ const router = createBrowserRouter([
   {
     path: "/skills",
     element: <Skills />
+  },
+  {
+    path: "/regras",
+    element: <Rules />
+  },
+  {
+    path: "/:raceName",
   }
 ]);
 
