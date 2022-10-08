@@ -10,6 +10,7 @@ import Wrapper from "../../components/wrapper/Wrapper";
 import styles from "./SignUp.css";
 import { useFormik } from 'formik';
 import { validationSchema, initialValues } from "../../formik/SignUp";
+import { ROUTES } from "../../navigation/siteRoutes";
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -69,7 +70,7 @@ export default function SignUp() {
             </CardActions>
 
             <Typography mt={3}>
-              Já possui uma conta? Faça o <Link style={styles.link} to="/login">login</Link>
+              Já possui uma conta? Faça o <Link style={styles.link} to={ROUTES.LOGIN}>login</Link>
             </Typography>
           </form>
 

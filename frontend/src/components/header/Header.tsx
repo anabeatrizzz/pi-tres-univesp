@@ -6,6 +6,7 @@ import styles from "./Header.css"
 import characterBackground from "../../assets/pictureGamer.png"
 import rpgName from "../../assets/crescente20Rpg.png"
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import { ROUTES } from "../../navigation/siteRoutes";
 
 function setNavLinkActive(isActive: boolean) {
   if (!isActive) {
@@ -201,7 +202,7 @@ export default function Header() {
           </div>
         </nav>
       </header>
-      <Link style={styles.characterBackgroundDiv} to="/login">
+      <Link style={styles.characterBackgroundDiv} to={ROUTES.LOGIN}>
         <img
           src={characterBackground}
           style={{ ...styles.characterBackgroundImg, display: displaySecondImg, }}
@@ -209,7 +210,7 @@ export default function Header() {
         />
       </Link>
 
-      <Link style={styles.firstImgLink} to="/">
+      <Link style={styles.firstImgLink} to={ROUTES.ROOT}>
         <img
           src={rpgName}
           style={{ ...styles.firstImg, display: displayFirstImg }}
