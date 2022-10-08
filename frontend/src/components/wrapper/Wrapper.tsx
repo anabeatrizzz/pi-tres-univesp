@@ -5,7 +5,7 @@ import Header from "../header";
 import styles from "./Wrapper.css";
 
 interface IWrapperPage {
-  children: any;
+  children?: any;
   paperComponent?: boolean;
   title?: string;
 }
