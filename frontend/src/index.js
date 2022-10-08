@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Skills from "./pages/skills";
 import Rules from "./pages/rules";
+import Class from "./pages/class";
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
     element: <Rules />
   },
   {
-    path: "/:raceName",
+    path: "/racas/:raceName",
+  },
+  {
+    path: "/classes/:className",
+    element: <Class />
   }
 ]);
 
