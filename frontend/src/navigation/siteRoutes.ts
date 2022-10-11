@@ -5,5 +5,8 @@ export enum ROUTES {
   SKILLS = "/skills",
   RULES = "/regras",
   RACE = "/racas/:raceName",
-  CLASS = "/classes/:className"
+  CLASS = "/classes/:className",
+  PROFILE = "/perfil",
+  CHARACTERS = "/personagens",
+  SUPPORT = "/suporte"
 } 
