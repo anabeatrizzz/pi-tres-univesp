@@ -7,6 +7,7 @@ import characterBackground from "../../assets/pictureGamer.png"
 import rpgName from "../../assets/crescente20Rpg.png"
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { ROUTES } from "../../navigation/siteRoutes";
+import Stack from "@mui/material/Stack";
 
 function setNavLinkActive(isActive: boolean) {
   if (!isActive) {
@@ -70,47 +71,48 @@ export default function Header() {
                         SISTEMA
                       </NavLink>
                       <Menu disableScrollLock={true} {...bindMenu(popupState)}>
-                        <PopupState disableAutoFocus popupId="mainRacesMenu" variant="popover">
-                          {
-                            (popupState) => (
-                              <>
-                                <MenuItem
-                                  style={styles.menuItem}
-                                  {...bindTrigger(popupState)}
-                                  divider
-                                >
-                                  Raças
-                                </MenuItem>
-
-                                <Menu anchorOrigin={{
-                                  vertical: 'center',
-                                  horizontal: 'right',
-                                }}
-                                  transformOrigin={{
+                        <Stack direction="row">
+                          <PopupState disableAutoFocus popupId="mainRacesMenu" variant="popover">
+                            {
+                              (popupState) => (
+                                <>
+                                  <MenuItem
+                                    style={styles.menuItem}
+                                    {...bindTrigger(popupState)}
+                                    
+                                  >
+                                    Raças
+                                  </MenuItem>
+                                  <Menu anchorOrigin={{
                                     vertical: 'center',
-                                    horizontal: 'left',
-                                  }} {...bindMenu(popupState)}>
-                                  {
-                                    Array(3).fill(1).map((_, index) => {
-                                      const linkTo = `/racas/raca${index + 1}`
-                                      return (
-                                        <Link style={styles.link} to={linkTo}>
-                                          <MenuItem
-                                            style={styles.menuItem}
-                                            onClick={popupState.close}
-                                            divider
-                                          >
-                                            Raça {index + 1}
-                                          </MenuItem>
-                                        </Link>
-                                      )
-                                    })
-                                  }
-                                </Menu>
-                              </>
-                            )
-                          }
-                        </PopupState>
+                                    horizontal: 'right',
+                                  }}
+                                    transformOrigin={{
+                                      vertical: 'center',
+                                      horizontal: 'left',
+                                    }} {...bindMenu(popupState)}>
+                                    {
+                                      Array(3).fill(1).map((_, index) => {
+                                        const linkTo = `/racas/raca${index + 1}`
+                                        return (
+                                          <Link style={styles.link} to={linkTo}>
+                                            <MenuItem
+                                              style={styles.menuItem}
+                                              onClick={popupState.close}
+                                              
+                                            >
+                                              Raça {index + 1}
+                                            </MenuItem>
+                                          </Link>
+                                        )
+                                      })
+                                    }
+                                  </Menu>
+                                </>
+                              )
+                            }
+                          </PopupState>
+                        
 
                         <PopupState disableAutoFocus popupId="mainClassesMenu" variant="popover">
                           {
@@ -119,7 +121,7 @@ export default function Header() {
                                 <MenuItem
                                   style={styles.menuItem}
                                   {...bindTrigger(popupState)}
-                                  divider
+                                  
                                 >
                                   Classes
                                 </MenuItem>
@@ -140,7 +142,7 @@ export default function Header() {
                                           <MenuItem
                                             style={styles.menuItem}
                                             onClick={popupState.close}
-                                            divider
+                                            
                                           >
                                             Classe {index + 1}
                                           </MenuItem>
@@ -156,7 +158,7 @@ export default function Header() {
                         </PopupState>
 
                         <MenuItem
-                          divider
+                          
                           style={styles.menuItem}
                           onClick={popupState.close}
                         >
@@ -169,7 +171,7 @@ export default function Header() {
                         </MenuItem>
 
                         <MenuItem
-                          divider
+                          
                           style={styles.menuItem}
                           onClick={popupState.close}>
                           <NavLink
@@ -179,6 +181,7 @@ export default function Header() {
                             Regras
                           </NavLink>
                         </MenuItem>
+                        </Stack>
                       </Menu>
                     </>
 

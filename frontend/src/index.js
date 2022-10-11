@@ -8,6 +8,7 @@ import Skills from "./pages/skills";
 import Rules from "./pages/rules";
 import Class from "./pages/class";
 import Race from "./pages/race";
+import Profile from "./pages/profile";
 import { ROUTES } from "./navigation/siteRoutes";
 import reportWebVitals from './reportWebVitals';
 import {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.CLASS,
     element: <Class />
+  },
+  {
+    path: ROUTES.PROFILE,
+    element: <Profile />
   }
 ]);
 
