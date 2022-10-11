@@ -1,13 +1,29 @@
 import express from "express";
-import cors from "cors"
+import cors from "cors";
 const app = express();
 import { urlencoded, json } from "body-parser";
+const connection = require("./database/database");
+const userController = require("./user/UserController");
+const novidadesController = require("./novidades/NovidadesController");
 
 app.use(cors());
 app.use(urlencoded({extended:false}));
 app.use(json());
+app.use("/",userController);
+app.use("/",novidadesController);
 
-var DB = {
+
+
+connection.authenticate().then(() => {
+    console.log("CONEXÃO FEITA COM SUCESSO");
+}).catch(() => {
+    console.log("ERRO AO CONECTAR NO BANCO DE DADOS ");
+})
+
+
+
+
+/* var DB = {
     users: [
         {
             id:1,
@@ -67,7 +83,7 @@ app.post("/novidades", (req,res) => {
     });
 
     res.sendStatus(201);
-})
+}) */
 app.listen(8081, () => {
     console.log("API RODANDO COM SUCESSO")
 })
