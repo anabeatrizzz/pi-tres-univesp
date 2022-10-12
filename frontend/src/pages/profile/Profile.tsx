@@ -6,6 +6,7 @@ import styles from "./Profile.css";
 import defaultProfile from "../../assets/user-profile-photo.jpg";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../navigation/siteRoutes";
+import { useDropzone } from 'react-dropzone';
 
 export default function Profile() {
   return (
