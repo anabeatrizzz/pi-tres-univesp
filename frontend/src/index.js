@@ -10,6 +10,7 @@ import Class from "./pages/class";
 import Race from "./pages/race";
 import Profile from "./pages/profile";
 import Support from "./pages/support";
+import Characters from "./pages/characters";
 import { ROUTES } from "./navigation/siteRoutes";
 import reportWebVitals from './reportWebVitals';
 import {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.SUPPORT,
     element: <Support />
+  },
+  {
+    path: ROUTES.CHARACTERS,
+    element: <Characters />
   }
 ]);
 
