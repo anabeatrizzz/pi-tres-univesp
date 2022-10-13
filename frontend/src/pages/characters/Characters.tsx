@@ -1,0 +1,50 @@
+import React from "react";
+import { Card as MUICard, CardContent, Typography, CardMedia, CardActionArea } from "@mui/material";
+import Wrapper from "../../components/wrapper/Wrapper";
+import defaultPhoto from "../../assets/user-profile-photo.jpg"
+import styles from "./Characters.css"
+import { ROUTES } from "../../navigation/siteRoutes";
+import { Link } from "react-router-dom";
+
+export default function Characters() {
+  return (
+    <Wrapper paperComponent title="PERSONAGENS">
+      <div style={styles.cardsDiv}>
+        {
+          Array(8).fill(1).map((_, index) => {
+            let linkTo = `/personagens/personagem${index+1}`
+            return (
+              <Link style={styles.link} to={linkTo}>
+                <Card characterName={`personagem${index+1}`} />
+              </Link>
+            )
+          })
+        }
+      </div>
+    </Wrapper>
+  )
+}
+
+interface ICard {
+  characterName: string;
+}
+
+function Card(props: ICard) {
+  return (
+    <MUICard sx={{ maxWidth: 150, marginBottom: 1, marginTop: 1 }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image={defaultPhoto}
+          alt="foto do personagem"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="subtitle1" component="div">
+            {props.characterName}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </MUICard>
+  )
+}
