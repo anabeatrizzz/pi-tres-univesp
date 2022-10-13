@@ -9,6 +9,7 @@ import Rules from "./pages/rules";
 import Class from "./pages/class";
 import Race from "./pages/race";
 import Profile from "./pages/profile";
+import Support from "./pages/support";
 import { ROUTES } from "./navigation/siteRoutes";
 import reportWebVitals from './reportWebVitals';
 import {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.PROFILE,
     element: <Profile />
+  },
+  {
+    path: ROUTES.SUPPORT,
+    element: <Support />
   }
 ]);
 
