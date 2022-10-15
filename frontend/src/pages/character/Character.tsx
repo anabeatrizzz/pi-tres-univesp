@@ -70,6 +70,33 @@ export default function Character() {
     },
   ]
 
+  const equipaments = [
+    {
+      part: "Bolsos",
+      equipaments: ["28 G", "29 G"]
+    },
+    {
+      part: "Arma(s)",
+      equipaments: ["CAJADO+RUBI"]
+    },
+    {
+      part: "Armadura",
+      equipaments: ["Armadura"]
+    },
+    {
+      part: "Acessórios",
+      equipaments: ["Acessório 1", "Acessório 2"]
+    },
+    {
+      part: "Roupa",
+      equipaments: ["PEÇA COMUM"]
+    },
+    {
+      part: "Outros",
+      equipaments: ["Mochila"]
+    },
+  ]
+
   return (
     <Wrapper paperComponent title={params.characterName?.toUpperCase()}>
       <CardContent style={styles.cardContent}>
@@ -98,7 +125,7 @@ export default function Character() {
           <div>
           {
             things.map((thing) => (
-              <div style={styles.progressDiv}>
+              <div key={thing.name} style={styles.progressDiv}>
                 <Typography variant="subtitle1">{thing.name}:</Typography>
                 <LinearProgress
                   style={styles.progress}
@@ -114,11 +141,21 @@ export default function Character() {
         </div>
       </CardContent>
       <CardContent>
+        <Typography variant="h5">Equipamentos</Typography>
+        <div style={styles.statsDiv}>
+          {
+            equipaments.map((equipament) => (
+              <EquipamentCard key={equipament.part} part={equipament.part} equipaments={equipament.equipaments} />
+            ))
+          }
+        </div>
+      </CardContent>
+      <CardContent>
         <Typography variant="h5">Atributos</Typography>
         <div style={styles.statsDiv}>
           {
             stats.map((stat) => (
-              <Card mainStat={stat.main} secondaryStats={stat.secondaries} />
+              <Card key={stat.main} mainStat={stat.main} secondaryStats={stat.secondaries} />
             ))
           }
         </div>
@@ -130,6 +167,11 @@ export default function Character() {
 interface ICard {
   mainStat: string;
   secondaryStats: string[];
+}
+
+interface IEquipamentCard {
+  part: string;
+  equipaments: string[];
 }
 
 function Card(props: ICard) {
@@ -151,6 +193,31 @@ function Card(props: ICard) {
             props.secondaryStats.map((stat) => (
               <Typography key={stat} variant="body2">
                 {stat}: 100
+              </Typography>
+            ))
+          }
+        </CardContent>
+      </Box>
+    </MUICard>
+  )
+}
+
+function EquipamentCard(props: IEquipamentCard){
+  return (
+    <MUICard style={styles.card}>
+      <Box style={styles.cardBox}>
+        <CardContent sx={{ flex: '1 0 auto' }}>
+          <Typography variant="h5">
+            {props.part}
+          </Typography>
+        </CardContent>
+      </Box>
+      <Box>
+        <CardContent>
+          {
+            props.equipaments.map((equipament) => (
+              <Typography key={equipament} variant="body2">
+                {equipament}
               </Typography>
             ))
           }
