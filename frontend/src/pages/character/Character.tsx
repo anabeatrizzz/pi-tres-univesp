@@ -70,30 +70,30 @@ export default function Character() {
     },
   ]
 
-  const equipaments = [
+  const equipament = [
     {
       part: "Bolsos",
-      equipaments: ["28 G", "29 G"]
+      equipamentList: ["28 G", "29 G"]
     },
     {
       part: "Arma(s)",
-      equipaments: ["CAJADO+RUBI"]
+      equipamentList: ["CAJADO+RUBI"]
     },
     {
       part: "Armadura",
-      equipaments: ["Armadura"]
+      equipamentList: ["Armadura"]
     },
     {
       part: "Acessórios",
-      equipaments: ["Acessório 1", "Acessório 2"]
+      equipamentList: ["Acessório 1", "Acessório 2"]
     },
     {
       part: "Roupa",
-      equipaments: ["PEÇA COMUM"]
+      equipamentList: ["PEÇA COMUM"]
     },
     {
       part: "Outros",
-      equipaments: ["Mochila"]
+      equipamentList: ["Mochila"]
     },
   ]
 
@@ -144,8 +144,8 @@ export default function Character() {
         <Typography variant="h5">Equipamentos</Typography>
         <div style={styles.statsDiv}>
           {
-            equipaments.map((equipament) => (
-              <EquipamentCard key={equipament.part} part={equipament.part} equipaments={equipament.equipaments} />
+            equipament.map((equipament) => (
+              <EquipamentCard key={equipament.part} part={equipament.part} equipamentList={equipament.equipamentList} />
             ))
           }
         </div>
@@ -171,7 +171,7 @@ interface ICard {
 
 interface IEquipamentCard {
   part: string;
-  equipaments: string[];
+  equipamentList: string[];
 }
 
 function Card(props: ICard) {
@@ -215,7 +215,7 @@ function EquipamentCard(props: IEquipamentCard){
       <Box>
         <CardContent>
           {
-            props.equipaments.map((equipament) => (
+            props.equipamentList.map((equipament) => (
               <Typography key={equipament} variant="body2">
                 {equipament}
               </Typography>
