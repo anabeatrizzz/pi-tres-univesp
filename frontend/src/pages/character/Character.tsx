@@ -1,15 +1,74 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "../../components/wrapper/Wrapper";
 import { useParams } from 'react-router-dom';
-import { CardContent, Typography, LinearProgress, Card as MUICard, Box, CardMedia, IconButton } from "@mui/material";
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import { CardContent, Typography, LinearProgress, Card as MUICard, Box } from "@mui/material";
 import defaultProfile from "../../assets/user-profile-photo.jpg";
 import styles from "./Character.css"
 
 export default function Character() {
-  const params = useParams()
+  const params = useParams();
+
+  const stats = [
+    {
+      main: "Físico",
+      secondaries: ["Resistência", "Agilidade", "Poder"]
+    },
+    {
+      main: "Mágico",
+      secondaries: ["Alteração", "Elemental", "Entropia", "Psicocinese", "Movimento", "Clarevidência"]
+    },
+    {
+      main: "Social",
+      secondaries: ["Engano", "Persuasão", "Presença"]
+    },
+    {
+      main: "Mental",
+      secondaries: ["Aprendizagem", "Lógica", "Percepção", "Vontade"]
+    },
+    {
+      main: "Alternativo",
+      secondaries: ["Memória", "Fé", "Artes"]
+    }
+  ]
+
+  const things = [
+    {
+      name: "Vida",
+      amount: 10
+    },
+    {
+      name: "XP",
+      amount: 20
+    },
+    {
+      name: "Energia",
+      amount: 30
+    },
+    {
+      name: "Defesa",
+      amount: 40
+    },
+    {
+      name: "Mentalidade",
+      amount: 50
+    },
+    {
+      name: "Corporal",
+      amount: 60
+    },
+    {
+      name: "Iniciativa",
+      amount: 70
+    },
+    {
+      name: "Armadura",
+      amount: 80
+    },
+    {
+      name: "Pontos de lenda",
+      amount: 90
+    },
+  ]
 
   return (
     <Wrapper paperComponent title={params.characterName?.toUpperCase()}>
@@ -21,79 +80,80 @@ export default function Character() {
         />
 
         <div style={styles.rightDiv}>
-          <Typography>
-            Idade: número
-          </Typography>
-
-          <Typography>
-            Nível: número
-          </Typography>
-
-          <Typography>
-            Raça: string
-          </Typography>
-
-          <Typography>
-            Classe: string
-          </Typography>
-
-          <div style={styles.progressDiv}>
-            <Typography>XP:</Typography>
-            <LinearProgress
-              style={styles.progress}
-              variant={"determinate"}
-              color={"primary"}
-              value={50}
-            />
-            <Typography>50 / 100</Typography>
+          <div style={styles.particularsDiv}>
+            <Typography variant="subtitle1">
+              Idade: número
+            </Typography>
+            <Typography variant="subtitle1">
+              Nível: número
+            </Typography>
+            <Typography variant="subtitle1">
+              Raça: string
+            </Typography>
+            <Typography variant="subtitle1">
+              Classe: string
+            </Typography>
           </div>
 
-          <div style={styles.progressDiv}>
-            <Typography>Vida:</Typography>
-            <LinearProgress
-              style={styles.progress}
-              variant={"determinate"}
-              color={"primary"}
-              value={90}
-            />
-            <Typography>90 / 100</Typography>
+          <div>
+          {
+            things.map((thing) => (
+              <div style={styles.progressDiv}>
+                <Typography variant="subtitle1">{thing.name}:</Typography>
+                <LinearProgress
+                  style={styles.progress}
+                  variant={"determinate"}
+                  color={"primary"}
+                  value={thing.amount}
+                />
+                <Typography>{thing.amount} / 100</Typography>
+              </div>
+            ))
+          }
           </div>
         </div>
       </CardContent>
       <CardContent>
         <Typography variant="h5">Atributos</Typography>
-        <div>
-          <Card />
+        <div style={styles.statsDiv}>
+          {
+            stats.map((stat) => (
+              <Card mainStat={stat.main} secondaryStats={stat.secondaries} />
+            ))
+          }
         </div>
       </CardContent>
     </Wrapper>
   )
 }
 
-function Card() {
+interface ICard {
+  mainStat: string;
+  secondaryStats: string[];
+}
+
+function Card(props: ICard) {
   return (
-    <MUICard sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <MUICard style={styles.card}>
+      <Box style={styles.cardBox}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
-            Físico
+            {props.mainStat}
           </Typography>
           <Typography variant="h5">
             100
           </Typography>
         </CardContent>
       </Box>
-      <Box style={{ width: "90%" }}>
+      <Box>
         <CardContent>
-          <Typography variant="h5">
-            Resistência: 100
-          </Typography>
-          <Typography variant="h5">
-            Agilidade: 100
-          </Typography>
-          <Typography variant="h5">
-            Poder: 100
-          </Typography>
+          {
+            props.secondaryStats.map((stat) => (
+              <Typography key={stat} variant="body2">
+                {stat}: 100
+              </Typography>
+            ))
+          }
         </CardContent>
       </Box>
     </MUICard>

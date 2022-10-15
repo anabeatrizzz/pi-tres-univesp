@@ -19,8 +19,31 @@ const styles = {
 
   rightDiv: {
     width: "100%",
-    marginLeft: 20
-  }
+    marginLeft: 20,
+    marginTop: 30
+  },
+
+  card: {
+    display: 'flex',
+    width: "30%"
+  },
+
+  cardBox: {
+    display: 'flex',
+    flexDirection: 'column' as "column"
+  },
+
+  statsDiv: {
+    display: "flex",
+    flexDirection: "row" as "row",
+    flexWrap: "wrap" as "wrap"
+  },
+
+  particularsDiv: {
+    flexDirection: "row" as "row",
+    display: "flex",
+    justifyContent: "space-between"
+  },
 }
 
 export default styles
