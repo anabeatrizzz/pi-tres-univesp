@@ -1,3 +1,5 @@
+import colors from "../../components/colors"
+
 const styles = {
   cardContent: {
     display: "flex",
@@ -23,6 +25,18 @@ const styles = {
     marginTop: 30
   },
 
+  btn: {
+    background: colors.darkYellow,
+    marginTop: 20
+  },
+
+  link: {
+    color: "black",
+    textDecoration: "none",
+    fontFamily: "Griffy",
+    fontSize: 15
+  },
+
   card: {
     display: 'flex',
     width: "30%"
@@ -44,6 +58,11 @@ const styles = {
     display: "flex",
     justifyContent: "space-between"
   },
+
+  createEquipmentDiv: {
+    justifyContent: "center",
+    display: "flex"
+  }
 }
 
 export default styles

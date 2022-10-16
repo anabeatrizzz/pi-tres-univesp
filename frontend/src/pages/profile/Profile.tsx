@@ -52,14 +52,14 @@ export default function Profile() {
               murilo@murilo.com
             </Typography>
 
-            <Button size="small" type="submit" style={{ ...styles.btn, marginBottom: 10 }} variant="contained">
+            <Button size="small" style={{ ...styles.btn, marginBottom: 10 }} variant="contained">
               <Typography style={styles.btnTxt}>
                 <Link style={styles.link} to={ROUTES.CHARACTERS}>
                   Personagens
                 </Link>
               </Typography>
             </Button>
-            <Button size="small" type="submit" style={styles.btn} variant="contained">
+            <Button size="small" style={styles.btn} variant="contained">
               <Typography style={styles.btnTxt}>
                 <Link style={styles.link} to={ROUTES.SUPPORT}>
                   Suporte

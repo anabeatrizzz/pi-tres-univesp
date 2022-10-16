@@ -9,5 +9,6 @@ export enum ROUTES {
   PROFILE = "/perfil",
   CHARACTERS = "/personagens",
   CHARACTER = "/personagens/:characterName",
-  SUPPORT = "/suporte"
+  SUPPORT = "/suporte",
+  CREATE_EQUIPMENT = "/criar_equipamento"
 } 

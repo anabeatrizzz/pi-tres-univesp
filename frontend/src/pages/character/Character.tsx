@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import Wrapper from "../../components/wrapper/Wrapper";
-import { useParams } from 'react-router-dom';
-import { CardContent, Typography, LinearProgress, Card as MUICard, Box } from "@mui/material";
+import { Link, useParams } from 'react-router-dom';
+import { CardContent, Typography, LinearProgress, Card as MUICard, Box, Button, Divider } from "@mui/material";
 import defaultProfile from "../../assets/user-profile-photo.jpg";
 import styles from "./Character.css"
+import { ROUTES } from "../../navigation/siteRoutes";
 
 export default function Character() {
   const params = useParams();
@@ -97,6 +98,25 @@ export default function Character() {
     },
   ]
 
+  const phrases = [
+    {
+      name: "Personalidade",
+      phrasesList: ["Eu estou sempre calmo, independente da situação. Eu nunca ergo minha voz ou deixo minhas emoções me controlarem.", "Eu abertamente digo o que outras pessoas apenas indicam."]
+    },
+    {
+      name: "Ideais",
+      phrasesList: ["Honestidade: Nossas ações devem vir de dentro e refletir quem nós realmente somos.", "Melhoramento Pessoal: O objetivo da vida é melhorar a si mesmo."]
+    },
+    {
+      name: "Vínculo",
+      phrasesList: ["Todas as pessoas da minha vila são meus irmãos e irmãs, e eu preciso defendê-los.", "Aqueles que lutam ao meu lado são aqueles dignos de morrer por."]
+    },
+    {
+      name: "Valor",
+      phrasesList: ["Eu tenho dificuldade em esconder minhas intenções verdadeiras. Minha língua afiada me causa problemas.", "Eu suspeito de estranhos e espero o pior deles."]
+    }
+  ]
+
   return (
     <Wrapper paperComponent title={params.characterName?.toUpperCase()}>
       <CardContent style={styles.cardContent}>
@@ -141,21 +161,43 @@ export default function Character() {
         </div>
       </CardContent>
       <CardContent>
-        <Typography variant="h5">Equipamentos</Typography>
+        <Typography fontFamily="Griffy" variant="h5">Frases</Typography>
+        <div style={styles.statsDiv}>
+          {
+            phrases.map((phrase) => (
+              <PhrasesCard
+                key={phrase.name}
+                name={phrase.name}
+                phrasesList={phrase.phrasesList}
+              />
+            ))
+          }
+        </div>
+      </CardContent>
+      <CardContent>
+        <Typography fontFamily="Griffy" variant="h5">Equipamentos</Typography>
         <div style={styles.statsDiv}>
           {
             equipament.map((equipament) => (
               <EquipamentCard key={equipament.part} part={equipament.part} equipamentList={equipament.equipamentList} />
             ))
           }
+          
+        </div>
+        <div style={styles.createEquipmentDiv}>
+          <Button variant="contained" style={styles.btn} size="small">
+            <Link style={styles.link} to={ROUTES.CREATE_EQUIPMENT}>
+              Criar equipamento
+            </Link>
+          </Button>
         </div>
       </CardContent>
       <CardContent>
-        <Typography variant="h5">Atributos</Typography>
+        <Typography fontFamily="Griffy" variant="h5">Atributos</Typography>
         <div style={styles.statsDiv}>
           {
             stats.map((stat) => (
-              <Card key={stat.main} mainStat={stat.main} secondaryStats={stat.secondaries} />
+              <StatsCard key={stat.main} mainStat={stat.main} secondaryStats={stat.secondaries} />
             ))
           }
         </div>
@@ -172,11 +214,17 @@ interface ICard {
 interface IEquipamentCard {
   part: string;
   equipamentList: string[];
+  width?: number;
 }
 
-function Card(props: ICard) {
+interface IPhrasesCard {
+  name: string;
+  phrasesList: string[];
+}
+
+function StatsCard(props: ICard) {
   return (
-    <MUICard style={styles.card}>
+    <MUICard style={{...styles.card, width: "40%"}}>
       <Box style={styles.cardBox}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
@@ -198,13 +246,24 @@ function Card(props: ICard) {
           }
         </CardContent>
       </Box>
+      <Divider orientation="vertical" />
+      <Box>
+      <CardContent sx={{ flex: '1 0 auto' }}>
+          <Typography variant="h5">
+            Custo
+          </Typography>
+          <Typography variant="h5">
+            1d6
+          </Typography>
+        </CardContent>
+      </Box>
     </MUICard>
   )
 }
 
 function EquipamentCard(props: IEquipamentCard){
   return (
-    <MUICard style={styles.card}>
+    <MUICard style={!props.width ? styles.card : {...styles.card, width: `${props.width}%`}}>
       <Box style={styles.cardBox}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
@@ -224,5 +283,11 @@ function EquipamentCard(props: IEquipamentCard){
         </CardContent>
       </Box>
     </MUICard>
+  )
+}
+
+function PhrasesCard(props: IPhrasesCard){
+  return(
+    <EquipamentCard part={props.name} equipamentList={props.phrasesList} width={100} />
   )
 }
