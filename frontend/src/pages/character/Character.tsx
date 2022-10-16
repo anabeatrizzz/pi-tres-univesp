@@ -214,7 +214,7 @@ interface ICard {
 interface IEquipamentCard {
   part: string;
   equipamentList: string[];
-  width?: number;
+  styles?: object;
 }
 
 interface IPhrasesCard {
@@ -263,8 +263,9 @@ function StatsCard(props: ICard) {
 
 function EquipamentCard(props: IEquipamentCard){
   return (
-    <MUICard style={!props.width ? styles.card : {...styles.card, width: `${props.width}%`}}>
-      <Box style={styles.cardBox}>
+    <MUICard style={!props.styles ? styles.card :
+      {...styles.card, ...props.styles }}>
+      <Box style={!props.styles ? styles.cardBox : {...styles.cardBox, flexBasis: "20%"}}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
             {props.part}
@@ -288,6 +289,6 @@ function EquipamentCard(props: IEquipamentCard){
 
 function PhrasesCard(props: IPhrasesCard){
   return(
-    <EquipamentCard part={props.name} equipamentList={props.phrasesList} width={100} />
+    <EquipamentCard part={props.name} equipamentList={props.phrasesList} styles={{ width: "100%" }} />
   )
 }
