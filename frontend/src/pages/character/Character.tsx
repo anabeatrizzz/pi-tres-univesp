@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Wrapper from "../../components/wrapper/Wrapper";
 import { Link, useParams } from 'react-router-dom';
 import { CardContent, Typography, LinearProgress, Card as MUICard, Box, Button, Divider } from "@mui/material";
@@ -117,6 +117,14 @@ export default function Character() {
     }
   ]
 
+  const skills = [
+    {
+      name: "Bola de fogo",
+      description: "O alvo cai como uma pena. [Movimento]",
+      cost: "1d6"
+    }
+  ]
+
   return (
     <Wrapper paperComponent title={params.characterName?.toUpperCase()}>
       <CardContent style={styles.cardContent}>
@@ -175,6 +183,29 @@ export default function Character() {
         </div>
       </CardContent>
       <CardContent>
+        <Typography fontFamily="Griffy" variant="h5">Atributos</Typography>
+        <div style={styles.statsDiv}>
+          {
+            stats.map((stat) => (
+              <StatsCard key={stat.main} mainStat={stat.main} secondaryStats={stat.secondaries} />
+            ))
+          }
+        </div>
+      </CardContent>
+      <CardContent>
+        <Typography fontFamily="Griffy" variant="h5">
+          Habilidades
+        </Typography>
+
+        <div style={styles.statsDiv}>
+          {
+            skills.map((skill) => (
+              <SkillsCard name={skill.name} description={skill.description} cost={skill.cost} />
+            ))
+          }
+        </div>
+      </CardContent>
+      <CardContent>
         <Typography fontFamily="Griffy" variant="h5">Equipamentos</Typography>
         <div style={styles.statsDiv}>
           {
@@ -192,23 +223,19 @@ export default function Character() {
           </Button>
         </div>
       </CardContent>
-      <CardContent>
-        <Typography fontFamily="Griffy" variant="h5">Atributos</Typography>
-        <div style={styles.statsDiv}>
-          {
-            stats.map((stat) => (
-              <StatsCard key={stat.main} mainStat={stat.main} secondaryStats={stat.secondaries} />
-            ))
-          }
-        </div>
-      </CardContent>
     </Wrapper>
   )
 }
 
-interface ICard {
+interface IStatsCard {
   mainStat: string;
   secondaryStats: string[];
+}
+
+interface ISkillsCard {
+  name: string;
+  description: string;
+  cost: string;
 }
 
 interface IEquipamentCard {
@@ -222,7 +249,7 @@ interface IPhrasesCard {
   phrasesList: string[];
 }
 
-function StatsCard(props: ICard) {
+function StatsCard(props: IStatsCard) {
   return (
     <MUICard style={{...styles.card, width: "40%"}}>
       <Box style={styles.cardBox}>
@@ -290,5 +317,35 @@ function EquipamentCard(props: IEquipamentCard){
 function PhrasesCard(props: IPhrasesCard){
   return(
     <EquipamentCard part={props.name} equipamentList={props.phrasesList} styles={{ width: "100%" }} />
+  )
+}
+
+function SkillsCard(props: ISkillsCard){
+  return (
+    <MUICard style={{...styles.card, width: "40%"}}>
+      <Box style={styles.cardBox}>
+        <CardContent sx={{ flex: '1 0 auto' }}>
+          <Typography variant="h5">
+            {props.name}
+          </Typography>
+        </CardContent>
+      </Box>
+      <Box>
+        <CardContent>
+          {props.description}
+        </CardContent>
+      </Box>
+      <Divider orientation="vertical" />
+      <Box>
+      <CardContent sx={{ flex: '1 0 auto' }}>
+          <Typography variant="h5">
+            Custo
+          </Typography>
+          <Typography variant="h5">
+            {props.cost}
+          </Typography>
+        </CardContent>
+      </Box>
+    </MUICard>
   )
 }
