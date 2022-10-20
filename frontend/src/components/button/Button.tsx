@@ -1,10 +1,12 @@
 import React from "react";
-import { Button as MUIButton } from "@mui/material";
+import { Button as MUIButton, ButtonProps } from "@mui/material";
 import styles from "./Button.css";
 
-export default function Button(props: any){
+interface IButton extends ButtonProps { }
+
+export default function Button(props: IButton){
   return(
-    <MUIButton variant="contained" style={styles.btn} size="small">
+    <MUIButton {...props} variant="contained" style={styles.btn} size="small">
       {props.children}
     </MUIButton>
   )

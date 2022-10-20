@@ -1,5 +1,5 @@
 import React from "react";
-import Wrapper from "../../components/wrapper/Wrapper";
+import Wrapper from "../../components/wrapper";
 import { Link, useParams } from 'react-router-dom';
 import { CardContent, Typography, LinearProgress, Card as MUICard, Box, Button, Divider } from "@mui/material";
 import defaultProfile from "../../assets/user-profile-photo.jpg";

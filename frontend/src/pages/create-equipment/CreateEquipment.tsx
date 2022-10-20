@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button, Card, CardContent, CardMedia, TextField, Typography } from "@mui/material";
 import Wrapper from "../../components/wrapper/Wrapper";
 import Staff from "../../assets/staff.jpg"
+import styles from "./CreateEquipment.css";
+import colors from "../../components/colors";
 
 export default function CreateEquipment() {
   const [count, setCount] = useState(0);
@@ -11,19 +13,38 @@ export default function CreateEquipment() {
       <Button
         onClick={() => { setCount(count + 1) }}
         variant="contained"
-        size="small">
-        +
+        size="small"
+        style={styles.btn}
+      >
+        <Typography style={styles.plusTxt}>+</Typography>
       </Button>
 
       <CardContent>
-        <div style={{
-          display: "flex",
-          flexDirection: "row" as "row",
-          flexWrap: "wrap" as "wrap"
-        }}>
+        <div style={styles.divCards}>
           {
             Array(count).fill(1).map((_, index) => (
-              <EquipmentCard editable={true} />
+              <EquipmentCard key={index} editable={true}>
+                <div style={styles.statsMinusAndPlus}>
+                  <Button
+                    onClick={() => { setCount(count - 1) }}
+                    variant="contained"
+                    size="small"
+                    style={styles.btn}
+                  >
+                    <Typography title="Excluir equipamento" style={styles.minusTxt}>-</Typography>
+                  </Button>
+
+                  <Button
+                    onClick={() => { }}
+                    variant="contained"
+                    size="small"
+                    style={styles.btn}
+                  >
+                    <Typography title="Salvar novo equipamento" style={styles.minusTxt}>Salvar</Typography>
+                  </Button>
+
+                </div>
+              </EquipmentCard>
             ))
           }
           <EquipmentCard editable={false} />
@@ -35,9 +56,12 @@ export default function CreateEquipment() {
 
 interface IEquipmentCard {
   editable: boolean;
+  children?: any;
 }
 
 function EquipmentCard(props: IEquipmentCard) {
+  const [count, setCount] = useState(1);
+
   return (
     <Card sx={{ maxWidth: 245 }}>
       <CardMedia
@@ -71,6 +95,7 @@ function EquipmentCard(props: IEquipmentCard) {
                 id="name"
                 label="Nome"
                 variant="standard"
+                fullWidth
                 margin="normal"
               />
 
@@ -78,29 +103,64 @@ function EquipmentCard(props: IEquipmentCard) {
                 required
                 id="description"
                 label="Descrição"
+                fullWidth
                 variant="standard"
                 margin="normal"
               />
 
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <TextField
-                  required
-                  id="number"
-                  label="Qtd"
-                  variant="standard"
-                  margin="normal"
-                  sx={{ width: "20%" }}
-                />
+              <div>
+                {
+                  Array(count).fill(1).map((_, index) => (
+                    <div style={styles.statsRow}>
+                      <TextField
+                        required
+                        id="number"
+                        label="Qtd"
+                        variant="standard"
+                        margin="normal"
+                      />
 
-                <TextField
-                  required
-                  id="stat"
-                  label="Atributo"
-                  variant="standard"
-                  margin="normal"
-                />
+                      <TextField
+                        required
+                        id="stat"
+                        label="Atributo"
+                        variant="standard"
+                        margin="normal"
+                      />
+
+                    </div>
+                  ))
+                }
+
+
+                <div style={styles.statsMinusAndPlus}>
+                  <Button
+                    onClick={() => { setCount(count + 1) }}
+                    variant="contained"
+                    size="small"
+                    style={styles.btn}
+                  >
+                    <Typography style={styles.minusTxt}>+</Typography>
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      if(count === 1) {
+                        return
+                      } else {
+                        setCount(count - 1)
+                      }
+                    }}
+                    variant="contained"
+                    size="small"
+                    style={styles.btn}
+                  >
+                    <Typography style={styles.minusTxt}>-</Typography>
+                  </Button>
+                </div>
 
               </div>
+
+              {props.children}
             </>
           )
         }
