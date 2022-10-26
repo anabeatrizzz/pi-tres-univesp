@@ -5,9 +5,12 @@ import { CardContent, Typography, LinearProgress, Card as MUICard, Box, Button, 
 import defaultProfile from "../../assets/user-profile-photo.jpg";
 import styles from "./Character.css"
 import { ROUTES } from "../../navigation/siteRoutes";
+import { useLocation } from "react-router-dom";
 
 export default function Character() {
   const params = useParams();
+  const location = useLocation();
+  const characterType = location.state.type
 
   const stats = [
     {
@@ -68,6 +71,29 @@ export default function Character() {
     {
       name: "Pontos de lenda",
       amount: 90
+    },
+  ]
+
+  const npcThings = [
+    {
+      name: "Vida",
+      amount: 10
+    },
+    {
+      name: "Defesa",
+      amount: 20
+    },
+    {
+      name: "Resistência",
+      amount: 30
+    },
+    {
+      name: "Agilidade",
+      amount: 30
+    },
+    {
+      name: "Poder",
+      amount: 40
     },
   ]
 
@@ -135,94 +161,138 @@ export default function Character() {
         />
 
         <div style={styles.rightDiv}>
-          <div style={styles.particularsDiv}>
-            <Typography variant="subtitle1">
-              Idade: número
-            </Typography>
-            <Typography variant="subtitle1">
-              Nível: número
-            </Typography>
-            <Typography variant="subtitle1">
-              Raça: string
-            </Typography>
-            <Typography variant="subtitle1">
-              Classe: string
-            </Typography>
-          </div>
+          {
+            characterType != "npc" ? (
+              <div style={styles.particularsDiv}>
+                <Typography variant="subtitle1">
+                  Idade: número
+                </Typography>
+                <Typography variant="subtitle1">
+                  Nível: número
+                </Typography>
+                <Typography variant="subtitle1">
+                  Raça: string
+                </Typography>
+                <Typography variant="subtitle1">
+                  Classe: string
+                </Typography>
+              </div>
+            ) : (
+              <></>
+            )
+          }
+
 
           <div>
-          {
-            things.map((thing) => (
-              <div key={thing.name} style={styles.progressDiv}>
-                <Typography variant="subtitle1">{thing.name}:</Typography>
-                <LinearProgress
-                  style={styles.progress}
-                  variant={"determinate"}
-                  color={"primary"}
-                  value={thing.amount}
-                />
-                <Typography>{thing.amount} / 100</Typography>
-              </div>
-            ))
-          }
+            {
+              characterType === "npc" ? (
+                <div style={styles.particularsDiv}>
+                  <Typography variant="subtitle1">
+                    Descrição: string
+                  </Typography>
+                </div>
+              ) : (
+                <></>
+              )
+            }
+
+
+            {
+              characterType !== "npc" ? (
+                things.map((thing) => (
+                  <div key={thing.name} style={styles.progressDiv}>
+                    <Typography variant="subtitle1">{thing.name}:</Typography>
+                    <LinearProgress
+                      style={styles.progress}
+                      variant={"determinate"}
+                      color={"primary"}
+                      value={thing.amount}
+                    />
+                    <Typography>{thing.amount} / 100</Typography>
+                  </div>
+                ))
+              ) : (
+                npcThings.map((thing) => (
+                  <div key={thing.name} style={styles.progressDiv}>
+                    <Typography variant="subtitle1">{thing.name}:</Typography>
+                    <LinearProgress
+                      style={styles.progress}
+                      variant={"determinate"}
+                      color={"primary"}
+                      value={thing.amount}
+                    />
+                    <Typography>{thing.amount} / 100</Typography>
+                  </div>
+                ))
+              )
+            }
           </div>
         </div>
       </CardContent>
-      <CardContent>
-        <Typography fontFamily="Griffy" variant="h5">Frases</Typography>
-        <div style={styles.statsDiv}>
-          {
-            phrases.map((phrase) => (
-              <PhrasesCard
-                key={phrase.name}
-                name={phrase.name}
-                phrasesList={phrase.phrasesList}
-              />
-            ))
-          }
-        </div>
-      </CardContent>
-      <CardContent>
-        <Typography fontFamily="Griffy" variant="h5">Atributos</Typography>
-        <div style={styles.statsDiv}>
-          {
-            stats.map((stat) => (
-              <StatsCard key={stat.main} mainStat={stat.main} secondaryStats={stat.secondaries} />
-            ))
-          }
-        </div>
-      </CardContent>
-      <CardContent>
-        <Typography fontFamily="Griffy" variant="h5">
-          Habilidades
-        </Typography>
+      {
+        characterType != "npc" ? (
+          <>
+            <CardContent>
+              <Typography fontFamily="Griffy" variant="h5">Frases</Typography>
+              <div style={styles.statsDiv}>
+                {
+                  phrases.map((phrase) => (
+                    <PhrasesCard
+                      key={phrase.name}
+                      name={phrase.name}
+                      phrasesList={phrase.phrasesList}
+                    />
+                  ))
+                }
+              </div>
+            </CardContent>
+            <CardContent>
+              <Typography fontFamily="Griffy" variant="h5">Atributos</Typography>
+              <div style={styles.statsDiv}>
+                {
+                  stats.map((stat) => (
+                    <StatsCard key={stat.main} mainStat={stat.main} secondaryStats={stat.secondaries} />
+                  ))
+                }
+              </div>
+            </CardContent>
+            <CardContent>
+              <Typography fontFamily="Griffy" variant="h5">
+                Habilidades
+              </Typography>
 
-        <div style={styles.statsDiv}>
-          {
-            skills.map((skill) => (
-              <SkillsCard name={skill.name} description={skill.description} cost={skill.cost} />
-            ))
-          }
-        </div>
-      </CardContent>
-      <CardContent>
-        <Typography fontFamily="Griffy" variant="h5">Equipamentos</Typography>
-        <div style={styles.statsDiv}>
-          {
-            equipament.map((equipament) => (
-              <EquipamentCard key={equipament.part} part={equipament.part} equipamentList={equipament.equipamentList} />
-            ))
-          }
-          
-        </div>
-        <div style={styles.createEquipmentDiv}>
-          <Button variant="contained" style={styles.btn} size="small">
-            <Link style={styles.link} to={ROUTES.CREATE_EQUIPMENT}>
-              Criar equipamento
-            </Link>
-          </Button>
-        </div>
-      </CardContent>
+              <div style={styles.statsDiv}>
+                {
+                  skills.map((skill) => (
+                    <SkillsCard name={skill.name} description={skill.description} cost={skill.cost} />
+                  ))
+                }
+              </div>
+            </CardContent>
+            <CardContent>
+              <Typography fontFamily="Griffy" variant="h5">Equipamentos</Typography>
+              <div style={styles.statsDiv}>
+                {
+                  equipament.map((equipament) => (
+                    <EquipamentCard key={equipament.part} part={equipament.part} equipamentList={equipament.equipamentList} />
+                  ))
+                }
+
+              </div>
+              <div style={styles.createEquipmentDiv}>
+                <Button variant="contained" style={styles.btn} size="small">
+                  <Link style={styles.link} to={ROUTES.CREATE_EQUIPMENT}>
+                    Criar equipamento
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </>
+        ) : (
+          <></>
+        )
+      }
+
     </Wrapper>
   )
 }
@@ -251,7 +321,7 @@ interface IPhrasesCard {
 
 function StatsCard(props: IStatsCard) {
   return (
-    <MUICard style={{...styles.card, width: "40%"}}>
+    <MUICard style={{ ...styles.card, width: "40%" }}>
       <Box style={styles.cardBox}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
@@ -275,7 +345,7 @@ function StatsCard(props: IStatsCard) {
       </Box>
       <Divider orientation="vertical" />
       <Box>
-      <CardContent sx={{ flex: '1 0 auto' }}>
+        <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
             Custo
           </Typography>
@@ -288,11 +358,11 @@ function StatsCard(props: IStatsCard) {
   )
 }
 
-function EquipamentCard(props: IEquipamentCard){
+function EquipamentCard(props: IEquipamentCard) {
   return (
     <MUICard style={!props.styles ? styles.card :
-      {...styles.card, ...props.styles }}>
-      <Box style={!props.styles ? styles.cardBox : {...styles.cardBox, flexBasis: "20%"}}>
+      { ...styles.card, ...props.styles }}>
+      <Box style={!props.styles ? styles.cardBox : { ...styles.cardBox, flexBasis: "20%" }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
             {props.part}
@@ -314,15 +384,15 @@ function EquipamentCard(props: IEquipamentCard){
   )
 }
 
-function PhrasesCard(props: IPhrasesCard){
-  return(
+function PhrasesCard(props: IPhrasesCard) {
+  return (
     <EquipamentCard part={props.name} equipamentList={props.phrasesList} styles={{ width: "100%" }} />
   )
 }
 
-function SkillsCard(props: ISkillsCard){
+function SkillsCard(props: ISkillsCard) {
   return (
-    <MUICard style={{...styles.card, width: "40%"}}>
+    <MUICard style={{ ...styles.card, width: "40%" }}>
       <Box style={styles.cardBox}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
@@ -337,7 +407,7 @@ function SkillsCard(props: ISkillsCard){
       </Box>
       <Divider orientation="vertical" />
       <Box>
-      <CardContent sx={{ flex: '1 0 auto' }}>
+        <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography variant="h5">
             Custo
           </Typography>

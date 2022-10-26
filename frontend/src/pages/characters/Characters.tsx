@@ -5,17 +5,43 @@ import defaultPhoto from "../../assets/user-profile-photo.jpg"
 import styles from "./Characters.css"
 import { ROUTES } from "../../navigation/siteRoutes";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Characters() {
+  const navigate = useNavigate();
+
   return (
     <Wrapper paperComponent title="PERSONAGENS">
+      <Typography variant="h4" fontFamily="Griffy">Comuns</Typography>
       <div style={styles.cardsDiv}>
+
         {
           Array(8).fill(1).map((_, index) => {
-            let linkTo = `/personagens/personagem${index+1}`
+            let linkTo = `/personagens/personagem${index + 1}`
             return (
               <Link style={styles.link} to={linkTo}>
-                <Card characterName={`personagem${index+1}`} />
+                <Card characterName={`personagem${index + 1}`} />
+              </Link>
+            )
+          })
+        }
+      </div>
+
+      <Typography variant="h4" fontFamily="Griffy">NPCs</Typography>
+      <div style={styles.cardsDiv}>
+
+        {
+          Array(8).fill(1).map((_, index) => {
+            let linkTo = `/personagens/npc${index + 1}`
+            return (
+              <Link
+                state={{
+                  type: "npc"
+                }}
+                style={styles.link}
+                to={linkTo}
+              >
+                <Card characterName={`npc${index + 1}`} />
               </Link>
             )
           })
