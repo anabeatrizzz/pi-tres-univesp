@@ -1,5 +1,15 @@
 import api from "./api";
 
-const getNews = api.get("/novidades").then((data) => { return data.data })
+const getNews = api.get("/novidades")
+  .then((data) => {
+    return data.data
+  })
 
-export { getNews }
+function postNews(data: any){
+  api.post("/novidade/create", { data }).then((data) => { console.log(data)}).catch((error) => console.log(error))
+}
+
+export {
+  getNews,
+  postNews
+}
