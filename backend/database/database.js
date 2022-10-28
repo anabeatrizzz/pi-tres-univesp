@@ -1,7 +1,14 @@
 const sequelize = require("sequelize");
 
-const connection = new sequelize('cct20pi3unvp','root','1234',{
-    host:'localhost',
+const connectionData = {
+    bd: "admin_cct20pi3unvp",
+    user: "admin_pi",
+    password: "1q2w3e",
+    host: "clovisgarcia.com.br"
+}
+
+const connection = new sequelize(connectionData.bd, connectionData.user, connectionData.password,{
+    host: connectionData.host,
     dialect:'mysql',
     timezone:"-03:00"
 });
