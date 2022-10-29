@@ -13,8 +13,9 @@ interface INews {
 
 export default function Initial() {
   const [news, setNews] = useState<INews[]>([])
+  const [count, setCount] = useState(0);
 
-  function post(){
+  function post() {
     postNews({
       titulo: "teste",
       descricao: "teste",
@@ -32,10 +33,26 @@ export default function Initial() {
 
   return (
     <Wrapper paperComponent title="NOVIDADES">
-      <Button onClick={() => post()}>POST</Button>
+      <Button
+        onClick={() => { setCount(count + 1) }}
+        style={{ marginBottom: 10 }}
+        btnType="plus"
+        title="Adicionar notícia"
+      />
+
+      {
+        Array(count).fill(1).map((_, index) => (
+          <Card editable key={index} />
+        ))
+      }
+
       {
         news.map((singleNews) => (
-          <Card key={singleNews.id} title={singleNews.titulo} description={singleNews.descricao} />
+          <Card
+            key={singleNews.id}
+            title={singleNews.titulo}
+            description={singleNews.descricao}
+          />
         ))
       }
     </Wrapper>
