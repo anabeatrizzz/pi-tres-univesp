@@ -36,13 +36,17 @@ export default function Initial() {
       <Button
         onClick={() => { setCount(count + 1) }}
         style={{ marginBottom: 10 }}
-        btnType="plus"
+        btntype="plus"
         title="Adicionar notícia"
       />
 
       {
         Array(count).fill(1).map((_, index) => (
-          <Card editable key={index} />
+          <Card
+            editable
+            key={index}
+            onClick={() => post()}
+          />
         ))
       }
 

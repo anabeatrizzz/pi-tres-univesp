@@ -3,7 +3,7 @@ import { Button as MUIButton, ButtonProps, Typography } from "@mui/material";
 import styles from "./Button.css";
 
 interface IButton extends ButtonProps {
-  btnType?: "plus" | "minus" | "normal" | "save" | "edit";
+  btntype?: "plus" | "minus" | "normal" | "save" | "edit";
 }
 
 export default function Button(props: IButton){
@@ -14,23 +14,23 @@ export default function Button(props: IButton){
       style={
         props.style ?
         {...styles.btn, ...props.style } :
-        props.btnType === "minus" ?
+        props.btntype === "minus" ?
         {...styles.btnDelete} :
         styles.btn
       }
       size="small"
     >
       {
-        props.btnType === "plus" ? (
+        props.btntype === "plus" ? (
           <Typography style={styles.btnTxt}>+</Typography>
         ) : 
-        props.btnType === "minus" ? (
+        props.btntype === "minus" ? (
           <Typography style={styles.btnDeleteTxt}>-</Typography>
         ) :
-        props.btnType === "save" ? (
+        props.btntype === "save" ? (
           <Typography style={styles.btnSave}>Salvar</Typography>
         ) :
-        props.btnType === "edit" ? (
+        props.btntype === "edit" ? (
           <Typography style={styles.btnSave}>Editar</Typography>
         ) : props.children
       }

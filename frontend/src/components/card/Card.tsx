@@ -33,6 +33,7 @@ interface ICard {
   description?: string;
   title?: string;
   editable?: boolean;
+  onClick?: () => void;
 }
 
 export default function Card(props: ICard) {
@@ -116,8 +117,17 @@ export default function Card(props: ICard) {
               />
             </CardContent>
             <CardActions style={{ justifyContent: "space-between" }} disableSpacing>
-              <Button btnType="minus" />
-              <Button btnType="save" />
+              <Button btntype="minus" />
+              <Button onClick={() => {
+                if(props.onClick !== undefined){
+                  props.onClick()
+                } else {
+                  return
+                }
+              }}
+              
+              btntype="save"
+              />
             </CardActions>
           </>
         )

@@ -11,7 +11,7 @@ export default function CreateEquipment() {
   return (
     <Wrapper paperComponent title="CRIAR EQUIPAMENTO">
       <Button
-        btnType="plus"
+        btntype="plus"
         onClick={() => { setCount(count + 1) }}
         title="Adicionar equipamento"
       />
@@ -23,7 +23,7 @@ export default function CreateEquipment() {
               <EquipmentCard key={index} editable={true}>
                 <div style={styles.statsMinusAndPlus}>
                   <Button
-                    btnType="minus"
+                    btntype="minus"
                     title="Excluir equipamento"
                     onClick={() => { setCount(count - 1) }}
                   />
@@ -31,7 +31,7 @@ export default function CreateEquipment() {
                   <Button
                     onClick={() => { }}
                     type="submit"
-                    btnType="save"
+                    btntype="save"
                     title="Salvar novo equipamento"
                   />
                 </div>
@@ -127,7 +127,7 @@ function EquipmentCard(props: IEquipmentCard) {
                 <div style={styles.statsMinusAndPlus}>
                   <Button
                     onClick={() => { setCount(count + 1) }}
-                    btnType="plus"
+                    btntype="plus"
                   />
 
                   <Button
@@ -138,7 +138,7 @@ function EquipmentCard(props: IEquipmentCard) {
                         setCount(count - 1)
                       }
                     }}
-                    btnType="minus"
+                    btntype="minus"
                   />
                 </div>
 

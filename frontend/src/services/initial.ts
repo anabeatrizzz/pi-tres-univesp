@@ -6,7 +6,9 @@ const getNews = api.get("/novidades")
   })
 
 function postNews(data: any){
-  api.post("/novidade/create", { data }).then((data) => { console.log(data)}).catch((error) => console.log(error))
+  api.post("/novidade/create", data)
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
 }
 
 export {
