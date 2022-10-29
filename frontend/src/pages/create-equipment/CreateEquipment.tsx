@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button, Card, CardContent, CardMedia, TextField, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, TextField, Typography } from "@mui/material";
 import Wrapper from "../../components/wrapper/Wrapper";
 import Staff from "../../assets/staff.jpg"
 import styles from "./CreateEquipment.css";
-import colors from "../../components/colors";
+import Button from "../../components/button"
 
 export default function CreateEquipment() {
   const [count, setCount] = useState(0);
@@ -11,13 +11,10 @@ export default function CreateEquipment() {
   return (
     <Wrapper paperComponent title="CRIAR EQUIPAMENTO">
       <Button
+        btnType="plus"
         onClick={() => { setCount(count + 1) }}
-        variant="contained"
-        size="small"
-        style={styles.btn}
-      >
-        <Typography style={styles.plusTxt}>+</Typography>
-      </Button>
+        title="Adicionar equipamento"
+      />
 
       <CardContent>
         <div style={styles.divCards}>
@@ -26,23 +23,17 @@ export default function CreateEquipment() {
               <EquipmentCard key={index} editable={true}>
                 <div style={styles.statsMinusAndPlus}>
                   <Button
+                    btnType="minus"
+                    title="Excluir equipamento"
                     onClick={() => { setCount(count - 1) }}
-                    variant="contained"
-                    size="small"
-                    style={styles.btn}
-                  >
-                    <Typography title="Excluir equipamento" style={styles.minusTxt}>-</Typography>
-                  </Button>
+                  />
 
                   <Button
                     onClick={() => { }}
-                    variant="contained"
-                    size="small"
-                    style={styles.btn}
-                  >
-                    <Typography title="Salvar novo equipamento" style={styles.minusTxt}>Salvar</Typography>
-                  </Button>
-
+                    type="submit"
+                    btnType="save"
+                    title="Salvar novo equipamento"
+                  />
                 </div>
               </EquipmentCard>
             ))
@@ -136,12 +127,9 @@ function EquipmentCard(props: IEquipmentCard) {
                 <div style={styles.statsMinusAndPlus}>
                   <Button
                     onClick={() => { setCount(count + 1) }}
-                    variant="contained"
-                    size="small"
-                    style={styles.btn}
-                  >
-                    <Typography style={styles.minusTxt}>+</Typography>
-                  </Button>
+                    btnType="plus"
+                  />
+
                   <Button
                     onClick={() => {
                       if(count === 1) {
@@ -150,12 +138,8 @@ function EquipmentCard(props: IEquipmentCard) {
                         setCount(count - 1)
                       }
                     }}
-                    variant="contained"
-                    size="small"
-                    style={styles.btn}
-                  >
-                    <Typography style={styles.minusTxt}>-</Typography>
-                  </Button>
+                    btnType="minus"
+                  />
                 </div>
 
               </div>
