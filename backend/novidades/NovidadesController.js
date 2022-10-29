@@ -17,7 +17,7 @@ app.get("/novidades",(req,res) =>{
 app.post("/novidade/create",(req,res) => {
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
-    user.create({
+    novidades.create({
         titulo: titulo,
         descricao: descricao
     }).then(() =>{

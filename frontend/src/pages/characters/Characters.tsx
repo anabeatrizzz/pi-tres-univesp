@@ -19,7 +19,13 @@ export default function Characters() {
           Array(8).fill(1).map((_, index) => {
             let linkTo = `/personagens/personagem${index + 1}`
             return (
-              <Link style={styles.link} to={linkTo}>
+              <Link
+                state={{
+                  type: "character"
+                }}
+                style={styles.link}
+                to={linkTo}
+              >
                 <Card characterName={`personagem${index + 1}`} />
               </Link>
             )

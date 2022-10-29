@@ -1,8 +1,10 @@
 import axios from "axios"
 
+const baseURL = "http://www.clovisgarcia.com.br:8079";
+
 const api = axios.create({
-  baseURL: "http://localhost:8081",
-  headers: {"Access-Control-Allow-Origin": "*"},
+  baseURL,
+  headers: { "Access-Control-Allow-Origin": "*" },
   timeout: 1000,
 })
 

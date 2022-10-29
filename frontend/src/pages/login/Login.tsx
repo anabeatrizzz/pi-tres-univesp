@@ -9,6 +9,7 @@ import { useFormik } from 'formik';
 import { Link, useNavigate } from "react-router-dom";
 import { validationSchema, initialValues } from "../../formik/Login";
 import { ROUTES } from "../../navigation/siteRoutes";
+import UserProfilePhoto from "../../assets/user-profile-photo.jpg"
 
 export default function Login() {
   const navigate = useNavigate()
@@ -22,7 +23,9 @@ export default function Login() {
     <Wrapper paperComponent title="LOGIN">
       <Card sx={{ maxWidth: 590 }} style={styles.card}>
         <CardContent style={styles.cardContent}>
+          <img style={{ width: "30%" }} src={UserProfilePhoto} alt="foto do personagem" />
           <form style={styles.divInputs} noValidate onSubmit={formik.handleSubmit}>
+
             <TextField
               margin="normal"
               value={formik.values.name}

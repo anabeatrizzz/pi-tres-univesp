@@ -273,8 +273,8 @@ export default function Character() {
               <Typography fontFamily="Griffy" variant="h5">Equipamentos</Typography>
               <div style={styles.statsDiv}>
                 {
-                  equipament.map((equipament) => (
-                    <EquipamentCard key={equipament.part} part={equipament.part} equipamentList={equipament.equipamentList} />
+                  equipament.map((equipament, index) => (
+                    <EquipamentCard key={index} part={equipament.part} equipamentList={equipament.equipamentList} />
                   ))
                 }
 
