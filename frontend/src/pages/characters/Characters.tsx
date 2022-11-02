@@ -59,9 +59,10 @@ export default function Characters() {
 
 interface ICard {
   characterName: string;
+  children?: any;
 }
 
-function Card(props: ICard) {
+export function Card(props: ICard) {
   return (
     <MUICard sx={{ maxWidth: 150, marginBottom: 1, marginTop: 1 }}>
       <CardActionArea>
@@ -76,6 +77,7 @@ function Card(props: ICard) {
             {props.characterName}
           </Typography>
         </CardContent>
+        {props.children}
       </CardActionArea>
     </MUICard>
   )
