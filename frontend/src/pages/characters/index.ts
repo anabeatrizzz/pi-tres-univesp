@@ -1,2 +1,3 @@
-import Characters from "./Characters";
+import Characters, { Card } from "./Characters";
 export default Characters
+export { Card }

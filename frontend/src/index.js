@@ -8,6 +8,7 @@ import Skills from "./pages/skills";
 import Rules from "./pages/rules";
 import Class from "./pages/class";
 import Race from "./pages/race";
+import Races from "./pages/races";
 import Profile from "./pages/profile";
 import Support from "./pages/support";
 import Characters from "./pages/characters";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.RACE,
     element: <Race />
+  },
+  {
+    path: ROUTES.RACES,
+    element: <Races />
   },
   {
     path: ROUTES.CLASS,

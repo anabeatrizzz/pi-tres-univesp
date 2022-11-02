@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import styles from "./Header.css"
@@ -19,8 +19,26 @@ function setNavLinkActive(isActive: boolean) {
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [displayFirstImg, setDisplayFirstImg] = useState("initial")
   const [displaySecondImg, setDisplaySecondImg] = useState("initial")
+
+  function setSystemNavLinkActive(){
+    const isSubLinkActive = location.pathname === ROUTES.RACES || 
+    location.pathname === ROUTES.SKILLS ||
+    location.pathname === ROUTES.RULES ||
+    location.pathname === ROUTES.CLASSES
+
+    if (!isSubLinkActive) {
+      return styles.navLink
+    } else {
+      return { ...styles.navLink, ...styles.navLinkActive }
+    }
+  }
+
+  useEffect(() => {
+    console.log(location)
+  }, [])
 
   useEffect(() => {
     const listenToScroll = () => {
@@ -56,6 +74,7 @@ export default function Header() {
               <NavLink
                 style={({ isActive }) => setNavLinkActive(isActive)}
                 to="/"
+                end
               >
                 INÍCIO
               </NavLink>
@@ -64,7 +83,8 @@ export default function Header() {
                   (popupState) => (
                     <>
                       <NavLink
-                        style={styles.navLink}
+                        //style={styles.navLink}
+                        style={() => setSystemNavLinkActive()}
                         to="#"
                         {...bindTrigger(popupState)}
                       >
@@ -81,9 +101,14 @@ export default function Header() {
                                     {...bindTrigger(popupState)}
                                     
                                   >
-                                    Raças
+                                    <NavLink
+                                      style={styles.subNavLink}
+                                      to={ROUTES.RACES}
+                                    >
+                                      Raças
+                                    </NavLink>
                                   </MenuItem>
-                                  <Menu anchorOrigin={{
+                                  {/* <Menu anchorOrigin={{
                                     vertical: 'center',
                                     horizontal: 'right',
                                   }}
@@ -107,7 +132,7 @@ export default function Header() {
                                         )
                                       })
                                     }
-                                  </Menu>
+                                  </Menu> */}
                                 </>
                               )
                             }
@@ -164,7 +189,7 @@ export default function Header() {
                         >
                           <NavLink
                             style={styles.subNavLink}
-                            to="/skills"
+                            to={ROUTES.SKILLS}
                           >
                             Skills
                           </NavLink>
