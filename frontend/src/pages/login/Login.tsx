@@ -23,7 +23,7 @@ export default function Login() {
     <Wrapper paperComponent title="LOGIN">
       <Card sx={{ maxWidth: 590 }} style={styles.card}>
         <CardContent style={styles.cardContent}>
-          <img style={{ width: "30%" }} src={UserProfilePhoto} alt="foto do personagem" />
+          {/* <img style={{ width: "30%" }} src={UserProfilePhoto} alt="foto do personagem" /> */}
           <form style={styles.divInputs} noValidate onSubmit={formik.handleSubmit}>
 
             <TextField

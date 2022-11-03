@@ -148,10 +148,15 @@ export default function Header() {
                                   {...bindTrigger(popupState)}
                                   
                                 >
-                                  Classes
+                                  <NavLink
+                                    style={styles.subNavLink}
+                                    to={ROUTES.CLASSES}
+                                  >
+                                    Classes
+                                  </NavLink>
                                 </MenuItem>
 
-                                <Menu anchorOrigin={{
+                                {/* <Menu anchorOrigin={{
                                   vertical: 'center',
                                   horizontal: 'right',
                                 }}
@@ -175,7 +180,7 @@ export default function Header() {
                                       )
                                     })
                                   }
-                                </Menu>
+                                </Menu> */}
                               </>
                             )
                           }

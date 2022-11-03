@@ -13,6 +13,7 @@ import Profile from "./pages/profile";
 import Support from "./pages/support";
 import Characters from "./pages/characters";
 import Character from "./pages/character";
+import Classes from "./pages/classes";
 import CreateEquipment from "./pages/create-equipment";
 import { ROUTES } from "./navigation/siteRoutes";
 import reportWebVitals from './reportWebVitals';
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.CREATE_EQUIPMENT,
     element: <CreateEquipment />
+  },
+  {
+    path: ROUTES.CLASSES,
+    element: <Classes />
   }
 ]);
 
