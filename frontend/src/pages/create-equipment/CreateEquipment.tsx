@@ -3,7 +3,8 @@ import { Card, CardContent, CardMedia, TextField, Typography } from "@mui/materi
 import Wrapper from "../../components/wrapper/Wrapper";
 import Staff from "../../assets/staff.jpg"
 import styles from "./CreateEquipment.css";
-import Button from "../../components/button"
+import Button from "../../components/button";
+import { useDropzone } from "react-dropzone";
 
 export default function CreateEquipment() {
   const [count, setCount] = useState(0);
@@ -52,12 +53,30 @@ interface IEquipmentCard {
 
 function EquipmentCard(props: IEquipmentCard) {
   const [count, setCount] = useState(1);
+  const [filePath, setFilePath] = useState('Imagemx.jpg');
+  const { acceptedFiles, getRootProps, getInputProps, open } = useDropzone({
+    accept: {
+      'image/png': ['.png', '.jpg'],
+    },
+    maxFiles: 1,
+    onDrop: (acceptedFiles) => {
+      setFilePath(URL.createObjectURL(acceptedFiles[0]))
+    }
+  });
 
   return (
     <Card sx={{ maxWidth: 245 }}>
+      {
+        props.editable ? (
+          <input {...getInputProps()} />
+        ) : <></>
+      }
+      
       <CardMedia
         component="img"
-        image={Staff}
+        alt="foto do equipamento"
+        image={filePath !== 'Imagemx.jpg' ? filePath : Staff}
+        onClick={open}
       />
       <CardContent>
         {
