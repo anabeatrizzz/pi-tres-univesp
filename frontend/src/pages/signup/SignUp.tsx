@@ -4,7 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Wrapper from "../../components/wrapper/Wrapper";
 import styles from "./SignUp.css";
@@ -12,8 +12,10 @@ import { useFormik } from 'formik';
 import { validationSchema, initialValues } from "../../formik/SignUp";
 import { ROUTES } from "../../navigation/siteRoutes";
 import UserProfilePhoto from "../../assets/user-profile-photo.jpg"
+import { useDropzone } from "react-dropzone";
 
 export default function SignUp() {
+  const [filePath, setFilePath] = useState('Imagemx.jpg')
   const navigate = useNavigate()
   const formik = useFormik({
     initialValues,
@@ -21,11 +23,27 @@ export default function SignUp() {
     onSubmit: () => { navigate("/") }
   })
 
+  const { acceptedFiles, getRootProps, getInputProps, open } = useDropzone({
+    accept: {
+      'image/png': ['.png', '.jpg'],
+    },
+    maxFiles: 1,
+    onDrop: (acceptedFiles) => {
+      setFilePath(URL.createObjectURL(acceptedFiles[0]))
+    }
+  });
+
   return (
     <Wrapper paperComponent title="CADASTRO">
       <Card sx={{ maxWidth: 590 }} style={styles.card}>
         <CardContent style={styles.cardContent}>
-          <img style={{ width: "30%" }} src={UserProfilePhoto} alt="foto do personagem" />
+          <input {...getInputProps()} />
+          <img
+            style={{ width: "30%" }}
+            src={filePath !== 'Imagemx.jpg' ? filePath : UserProfilePhoto}
+            alt="foto do personagem"
+            onClick={open}
+          />
           <form style={styles.divInputs} noValidate onSubmit={formik.handleSubmit}>
             <TextField
               margin="normal"

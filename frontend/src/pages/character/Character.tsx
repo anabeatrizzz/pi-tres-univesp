@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "../../components/wrapper";
 import { Link, useParams } from 'react-router-dom';
 import { CardContent, Typography, LinearProgress, Card as MUICard, Box, Button, Divider } from "@mui/material";
@@ -6,11 +6,23 @@ import defaultProfile from "../../assets/user-profile-photo.jpg";
 import styles from "./Character.css"
 import { ROUTES } from "../../navigation/siteRoutes";
 import { useLocation } from "react-router-dom";
+import { useDropzone } from "react-dropzone";
 
 export default function Character() {
+  const [filePath, setFilePath] = useState('Imagemx.jpg')
   const params = useParams();
   const location = useLocation();
   const characterType = location.state.type
+
+  const { acceptedFiles, getRootProps, getInputProps, open } = useDropzone({
+    accept: {
+      'image/png': ['.png', '.jpg'],
+    },
+    maxFiles: 1,
+    onDrop: (acceptedFiles) => {
+      setFilePath(URL.createObjectURL(acceptedFiles[0]))
+    }
+  });
 
   const stats = [
     {
@@ -154,10 +166,12 @@ export default function Character() {
   return (
     <Wrapper paperComponent title={params.characterName?.toUpperCase()}>
       <CardContent style={styles.cardContent}>
+        <input {...getInputProps()} />
         <img
           alt="foto do personagem"
-          src={defaultProfile}
+          src={filePath !== 'Imagemx.jpg' ? filePath : defaultProfile}
           width="25%"
+          onClick={open}
         />
 
         <div style={styles.rightDiv}>
@@ -181,8 +195,7 @@ export default function Character() {
               <></>
             )
           }
-
-
+          
           <div>
             {
               characterType === "npc" ? (

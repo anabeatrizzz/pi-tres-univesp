@@ -14,17 +14,11 @@ export default function Profile() {
     accept: {
       'image/png': ['.png', '.jpg'],
     },
-    maxFiles: 1
-  });
-
-  useEffect(() => {
-    if(acceptedFiles[0] !== undefined){
-      acceptedFiles.map((acceptedFile: any) => {
-        setFilePath(acceptedFile.path)
-        return null
-      })
+    maxFiles: 1,
+    onDrop: (acceptedFiles) => {
+      setFilePath(URL.createObjectURL(acceptedFiles[0]))
     }
-  }, [acceptedFiles])
+  });
 
   return (
     <Wrapper paperComponent title="PERFIL">
