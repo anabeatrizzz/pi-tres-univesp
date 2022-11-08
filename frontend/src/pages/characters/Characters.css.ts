@@ -10,6 +10,12 @@ const styles = {
   link: {
     textDecoration: 'none',
     color: 'black',
+  },
+
+  editIconDiv: {
+    display: "flex",
+    justifyContent: "flex-end",
+    padding: 10
   }
 }
 

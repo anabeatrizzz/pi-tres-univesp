@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardMedia, TextField, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, TextField, Typography, CardProps } from "@mui/material";
 import Wrapper from "../../components/wrapper/Wrapper";
 import Staff from "../../assets/staff.jpg"
 import styles from "./CreateEquipment.css";
@@ -8,6 +8,7 @@ import { useDropzone } from "react-dropzone";
 
 export default function CreateEquipment() {
   const [count, setCount] = useState(0);
+  const [isEditable, setIsEditable] = useState(false)
 
   return (
     <Wrapper paperComponent title="CRIAR EQUIPAMENTO">
@@ -46,7 +47,7 @@ export default function CreateEquipment() {
   )
 }
 
-interface IEquipmentCard {
+interface IEquipmentCard extends CardProps {
   editable: boolean;
   children?: any;
 }
@@ -65,7 +66,7 @@ function EquipmentCard(props: IEquipmentCard) {
   });
 
   return (
-    <Card sx={{ maxWidth: 245 }}>
+    <Card onDoubleClick={() => {}} sx={{ maxWidth: 245 }}>
       {
         props.editable ? (
           <input {...getInputProps()} />
