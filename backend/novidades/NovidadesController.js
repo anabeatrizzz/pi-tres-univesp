@@ -27,10 +27,11 @@ app.post("/novidades",(req,res) => {
 });
 
 app.put("/novidade/:id",(req,res) => {
-   var id = parseInt(req.params.id);
-   var titulo = req.body.titulo;
+   let id = parseInt(req.params.id);
+   let titulo = req.body.titulo;
+   let descricao = req.body.descricao;
    console.log(titulo);
-  novidades.update({titulo:titulo},{where:{id:id}}).then(data => {
+  novidades.update({titulo:titulo,descricao:descricao},{where:{id:id}}).then(data => {
     console.log(data);
     res.sendStatus(200);
    });
