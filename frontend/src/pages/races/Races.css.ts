@@ -8,6 +8,12 @@ const styles = {
   editIconDiv: {
     display: "flex",
     justifyContent: "flex-end"
+  },
+
+  statsMinusAndPlus: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: 20
   }
 }
 

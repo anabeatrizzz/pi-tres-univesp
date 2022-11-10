@@ -7,6 +7,7 @@ import { ROUTES } from "../../navigation/siteRoutes";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Edit } from "@mui/icons-material";
+import Button from "../../components/button";
 
 export default function Characters() {
   const navigate = useNavigate();
@@ -117,6 +118,8 @@ export function Card(props: ICard) {
                 margin="normal"
                 fullWidth
               />
+
+              {props.children}
             </CardContent>
           </CardActionArea>
         )
