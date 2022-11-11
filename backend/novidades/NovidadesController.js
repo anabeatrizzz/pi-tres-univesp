@@ -22,9 +22,21 @@ app.post("/novidades",(req,res) => {
         titulo: titulo,
         descricao: descricao
     }).then(() =>{
-        res.statusCode(201);
+        res.sendStatus(201);
     });
 });
+
+app.delete("/novidade/:id", (req,res) =>{
+    if(isNaN(req.params.id)){
+       return res.sendStatus(400);
+    }
+    let id = parseInt(req.params.id);
+    novidades.destroy({where:{id:id}}).then(() =>{
+        res.sendStatus(200);
+    })
+
+
+})
 
 app.put("/novidade/:id",(req,res) => {
    let id = parseInt(req.params.id);
