@@ -3,7 +3,8 @@ import BgImg from "../../assets/races-bg.png";
 const styles = {
   racesContainer: {
     display: "flex",
-    paddingTop: 10
+    paddingTop: 10,
+    flexWrap: "wrap" as "wrap"
     //justifyContent: "space-evenly",
     //flexWrap: "wrap" as "wrap"
   },
@@ -19,7 +20,14 @@ const styles = {
     backgroundImage: `url(${BgImg})`,
     backgroundSize: "100%",
     backgroundRepeat: "no-repeat",
-    padding: 60
+    padding: 60,
+    paddingTop: 50,
+    paddingRight: 50
+  },
+
+  cardTxt: {
+    fontWeight: 700,
+    fontSize: 11
   },
 
   editIconDiv: {

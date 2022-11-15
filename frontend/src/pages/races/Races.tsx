@@ -30,102 +30,29 @@ export default function Races() {
         title="Adicionar equipamento"
       />
       <div style={styles.racesContainer}>
-        <div style={styles.raceOutterContainer}>
-          <div style={styles.raceInnerContainer}>
-            <input {...getInputProps()} />
-            <img
-              alt="foto do personagem"
-              src={filePath !== 'Imagemx.jpg' ? filePath : defaultProfile}
-              width="25%"
-              onClick={open}
-            />
-          </div>
-          <div style={styles.raceInnerContainer}>
-            <Typography>Porte fisico medio-grande, minimo de 180cm e max 220cm, todos verdes/amarelados. Completamente imune a venenos. São uma raça de guerreiros bravos e loucos, recebem 01 de vantagem em testes de: Intimidar, Ameaçar, e Determinação.
-              Não muito comuns.
-            </Typography>
-          </div>
-        </div>
-
-        <div style={styles.raceOutterContainer}>
-          <div style={styles.raceInnerContainer}>
-            <input {...getInputProps()} />
-            <img
-              alt="foto do personagem"
-              src={filePath !== 'Imagemx.jpg' ? filePath : defaultProfile}
-              width="25%"
-              onClick={open}
-            />
-          </div>
-
-          <div style={styles.raceInnerContainer}>
-            <Typography  style={{ fontFamily: "Griffy", fontWeight: 700}}>Porte fisico medio-grande, minimo de 180cm e max 220cm, todos verdes/amarelados.<br /><br />Completamente imune a venenos. São uma raça de guerreiros bravos e loucos, recebem 01 de vantagem em testes de: Intimidar, Ameaçar, e Determinação.<br/><br />Não muito comuns.
-            </Typography>
-          </div>
-        </div>
-        {/* {
-          Array(count).fill(1).map((_, index) => {
-            return (
-              <Card characterName="Meio Orc">
-                <div style={styles.statsMinusAndPlus}>
-                  <Button
-                    btntype="minus"
-                    title="Excluir raça"
-                    onClick={() => { setCount(count - 1) }}
-                  />
-
-                  <Button
-                    onClick={() => { }}
-                    type="submit"
-                    btntype="save"
-                    title="Salvar nova raça"
-                  />
-                </div>
-              </Card>
-            )
-          })
-        }
-        <Card characterName="Meio Orc">
-          <div style={styles.statsMinusAndPlus}>
-            <Button
-              btntype="minus"
-              title="Excluir raça"
-              onClick={() => { setCount(count - 1) }}
-            />
-            <Button
-              onClick={() => { }}
-              type="submit"
-              btntype="save"
-              title="Salvar nova raça"
-            />
-          </div>
-        </Card>
-
         {
           Array(3).fill(1).map((_, index) => {
             return (
-              <div style={{ backgroundImage: `url(${BgImg})`, backgroundSize: "100%", backgroundRepeat: "no-repeat" }}>
-                <div style={{ width: "50%"}}>
-                  <Card characterName="Meio Orc">
-                    <div style={styles.statsMinusAndPlus}>
-                      <Button
-                        btntype="minus"
-                        title="Excluir raça"
-                        onClick={() => { setCount(count - 1) }}
-                      />
-                      <Button
-                        onClick={() => { }}
-                        type="submit"
-                        btntype="save"
-                        title="Salvar nova raça"
-                      />
-                    </div>
-                  </Card>
+              <div key={index} style={styles.raceOutterContainer}>
+                <div style={styles.raceInnerContainer}>
+                  <input {...getInputProps()} />
+                  <img
+                    alt="foto do personagem"
+                    src={filePath !== 'Imagemx.jpg' ? filePath : defaultProfile}
+                    width="100%"
+                    height="95%"
+                    onClick={open}
+                  />
+                </div>
+                <div style={styles.raceInnerContainer}>
+                  <Typography style={styles.cardTxt}>
+                    Porte fisico medio-grande, minimo de 180cm e max 220cm, todos verdes/amarelados.<br /><br />Completamente imune a venenos. São uma raça de guerreiros bravos e loucos, recebem 01 de vantagem em testes de: Intimidar, Ameaçar, e Determinação.<br /><br />Não muito comuns.
+                  </Typography>
                 </div>
               </div>
             )
           })
-        } */}
+        }
       </div>
 
     </Wrapper>
