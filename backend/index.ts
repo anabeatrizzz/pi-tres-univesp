@@ -5,12 +5,14 @@ import { urlencoded, json } from "body-parser";
 const connection = require("./database/database");
 const userController = require("./user/UserController");
 const novidadesController = require("./novidades/NovidadesController");
+const classeController = require("./classes/ClasseController")
 
 app.use(cors());
 app.use(urlencoded({extended:false}));
 app.use(json());
 app.use("/",userController);
 app.use("/",novidadesController);
+app.use("/",classeController);
 
 
 
