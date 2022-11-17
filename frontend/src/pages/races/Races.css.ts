@@ -1,5 +1,3 @@
-import BgImg from "../../assets/races-bg.png";
-
 const styles = {
   racesContainer: {
     display: "flex",
@@ -16,7 +14,7 @@ const styles = {
   },
 
   raceInnerContainer: {
-    backgroundImage: `url(${BgImg})`,
+    //backgroundImage: `url(${BgImg})`,
     backgroundSize: "100%",
     backgroundRepeat: "no-repeat",
     padding: 60,
