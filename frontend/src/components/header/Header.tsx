@@ -37,10 +37,6 @@ export default function Header() {
   }
 
   useEffect(() => {
-    console.log(location)
-  }, [])
-
-  useEffect(() => {
     const listenToScroll = () => {
       let heightToHideFirstImageFrom = 10;
       let heightToHideSecondImageFrom = 50;

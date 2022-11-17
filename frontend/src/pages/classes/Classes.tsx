@@ -6,7 +6,7 @@ import styles from "./Classes.css"
 
 export default function Classes() {
   return (
-    <Wrapper paperComponent title="RAÇAS">
+    <Wrapper paperComponent title="CLASSES">
       <div style={styles.classesContainer}>
       {
         Array(4).fill(1).map((_, index) => {
