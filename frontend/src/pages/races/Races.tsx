@@ -11,60 +11,60 @@ import defaultProfile from "../../assets/user-profile-photo.jpg";
 
 export default function Races() {
   const [count, setCount] = useState(1);
-  const [filePath, setFilePath] = useState('Imagemx.jpg')
-  const { acceptedFiles, getRootProps, getInputProps, open } = useDropzone({
-    accept: {
-      'image/png': ['.png', '.jpg'],
-    },
-    maxFiles: 1,
-    onDrop: (acceptedFiles) => {
-      setFilePath(URL.createObjectURL(acceptedFiles[0]))
-    }
-  });
 
   return (
     <Wrapper paperComponent title="RAÇAS">
       <Button
         btntype="plus"
         onClick={() => { setCount(count + 1) }}
-        title="Adicionar equipamento"
+        title="Adicionar raça"
       />
       <div style={styles.racesContainer}>
-        {
+      {
           Array(count).fill(1).map((_, index) => {
             return (
-              <Cards description={<Typography style={styles.cardTxt}>
-                Porte fisico medio-grande, minimo de 180cm e max 220cm, todos verdes/amarelados.<br /><br />Completamente imune a venenos. São uma raça de guerreiros bravos e loucos, recebem 01 de vantagem em testes de: Intimidar, Ameaçar, e Determinação.<br /><br />Não muito comuns.
-              </Typography>}>
+              <Card characterName="Meio Orc">
+                <div style={styles.statsMinusAndPlus}>
+                  <Button
+                    btntype="minus"
+                    title="Excluir raça"
+                    onClick={() => { setCount(count - 1) }}
+                  />
 
-              </Cards>
-              // <div key={index} style={styles.raceOutterContainer}>
-              //   <div style={styles.raceInnerContainer}>
-              //     <input {...getInputProps()} />
-              //     <img
-              //       alt="foto do personagem"
-              //       src={filePath !== 'Imagemx.jpg' ? filePath : defaultProfile}
-              //       width="100%"
-              //       height="95%"
-              //       onClick={open}
-              //     />
-              //   </div>
-              //   <div style={styles.raceInnerContainer}>
-              //     <Typography style={styles.cardTxt}>
-              //       Porte fisico medio-grande, minimo de 180cm e max 220cm, todos verdes/amarelados.<br /><br />Completamente imune a venenos. São uma raça de guerreiros bravos e loucos, recebem 01 de vantagem em testes de: Intimidar, Ameaçar, e Determinação.<br /><br />Não muito comuns.
-              //     </Typography>
-              //   </div>
-              // </div>
+                  <Button
+                    onClick={() => { }}
+                    type="submit"
+                    btntype="save"
+                    title="Salvar nova raça"
+                  />
+                </div>
+              </Card>
             )
           })
         }
+        <Card characterName="Meio Orc">
+          <div style={styles.statsMinusAndPlus}>
+            <Button
+              btntype="minus"
+              title="Excluir raça"
+              onClick={() => { setCount(count - 1) }}
+            />
+
+            <Button
+              onClick={() => { }}
+              type="submit"
+              btntype="save"
+              title="Salvar nova raça"
+            />
+          </div>
+        </Card>
       </div>
 
     </Wrapper>
   )
 }
 
-interface ICards {
+/*interface ICards {
   description: string | ReactElement;
   children?: any;
   editable?: boolean;
@@ -126,7 +126,7 @@ export function Cards(props: ICards) {
           </>
         )
       }
-      {/* <div style={styles.raceInnerContainer}>
+      <div style={styles.raceInnerContainer}>
         <input {...getInputProps()} />
         <img
           alt="foto do personagem"
@@ -138,8 +138,8 @@ export function Cards(props: ICards) {
       </div>
       <div style={styles.raceInnerContainer}>
         {props.description}
-      </div> */}
+      </div>
       {props.children}
     </div>
   )
-}
+}*/

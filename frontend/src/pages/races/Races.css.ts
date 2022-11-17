@@ -3,10 +3,9 @@ import BgImg from "../../assets/races-bg.png";
 const styles = {
   racesContainer: {
     display: "flex",
-    paddingTop: 10,
-    flexWrap: "wrap" as "wrap"
-    //justifyContent: "space-evenly",
-    //flexWrap: "wrap" as "wrap"
+    justifyContent: "space-evenly",
+    flexWrap: "wrap" as "wrap",
+    paddingTop: 10
   },
 
   raceOutterContainer: {

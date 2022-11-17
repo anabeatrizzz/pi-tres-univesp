@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Edit } from "@mui/icons-material";
 import Button from "../../components/button";
+import { useDropzone } from "react-dropzone";
+import defaultProfile from "../../assets/user-profile-photo.jpg";
 
 export default function Characters() {
   const navigate = useNavigate();
@@ -67,6 +69,16 @@ interface ICard {
 
 export function Card(props: ICard) {
   const [isEditable, setIsEditable] = useState(false);
+  const [filePath, setFilePath] = useState('Imagemx.jpg')
+  const { acceptedFiles, getRootProps, getInputProps, open } = useDropzone({
+    accept: {
+      'image/png': ['.png', '.jpg'],
+    },
+    maxFiles: 1,
+    onDrop: (acceptedFiles) => {
+      setFilePath(URL.createObjectURL(acceptedFiles[0]))
+    }
+  });
 
   return (
     <MUICard sx={{ maxWidth: 150, marginBottom: 1, marginTop: 1 }}>
@@ -94,11 +106,13 @@ export function Card(props: ICard) {
           </CardActionArea>
         ) : (
           <CardActionArea>
+            <input {...getInputProps()} />
             <CardMedia
               component="img"
               height="140"
-              image={defaultPhoto}
+              src={filePath !== 'Imagemx.jpg' ? filePath : defaultProfile}
               alt="foto do personagem"
+              onClick={open}
             />
             <CardContent>
               <TextField
