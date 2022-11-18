@@ -6,14 +6,15 @@ import styles from "./EditablePage.css";
 import { Card as MUICard, CardContent, Typography, CardMedia, CardActionArea, TextField } from "@mui/material";
 import defaultPhoto from "../../assets/user-profile-photo.jpg";
 import { Edit } from "@mui/icons-material";
+import { postClass } from "../../services/classes";
 
 interface IEditablePage {
   pageTitle: string;
   attribute: string;
 }
 
-export default function EditablePage(props: IEditablePage){
-  const [count, setCount] = useState(1);
+export default function EditablePage(props: IEditablePage) {
+  const [count, setCount] = useState(2);
 
   return (
     <Wrapper paperComponent title={props.pageTitle}>
@@ -23,7 +24,7 @@ export default function EditablePage(props: IEditablePage){
         title={`Adicionar ${props.attribute}`}
       />
       <div style={styles.racesContainer}>
-      {
+        {
           Array(count).fill(1).map((_, index) => {
             return (
               <Card attribute={props.attribute} attributeName="Meio Orc">
@@ -35,7 +36,7 @@ export default function EditablePage(props: IEditablePage){
                   />
 
                   <Button
-                    onClick={() => { }}
+                    onClick={() => { postClass({  }) }}
                     type="submit"
                     btntype="save"
                     title={`Salvar nova ${props.attribute}`}
@@ -45,31 +46,14 @@ export default function EditablePage(props: IEditablePage){
             )
           })
         }
-        <Card attributeName="Meio Orc">
-          <div style={styles.statsMinusAndPlus}>
-            <Button
-              btntype="minus"
-              title={`Excluir ${props.attribute}`}
-              onClick={() => { setCount(count - 1) }}
-            />
-
-            <Button
-              onClick={() => { }}
-              type="submit"
-              btntype="save"
-              title={`Salvar nova ${props.attribute}`}
-            />
-          </div>
-        </Card>
       </div>
-
     </Wrapper>
   )
 }
 
 interface ICard {
   attributeName: string;
-  attribute?: string;
+  attribute: string;
   children?: any;
   editable?: boolean;
 }
@@ -139,6 +123,21 @@ export function Card(props: ICard) {
                 margin="normal"
                 fullWidth
               />
+
+              <div style={styles.statsMinusAndPlus}>
+                <Button
+                  btntype="minus"
+                  title={`Excluir ${props.attribute}`}
+                  onClick={() => { }}
+                />
+
+                <Button
+                  onClick={() => { }}
+                  type="submit"
+                  btntype="save"
+                  title={`Salvar nova ${props.attribute}`}
+                />
+              </div>
 
               {props.children}
             </CardContent>
