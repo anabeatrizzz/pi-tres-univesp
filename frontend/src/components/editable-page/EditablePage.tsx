@@ -7,6 +7,8 @@ import { Card as MUICard, CardContent, Typography, CardMedia, CardActionArea, Te
 import defaultPhoto from "../../assets/user-profile-photo.jpg";
 import { Edit } from "@mui/icons-material";
 import { postClass } from "../../services/classes";
+import { useFormik } from 'formik';
+import { validationSchema, initialValues } from "../../formik/Classes";
 
 interface IEditablePage {
   pageTitle: string;
@@ -27,22 +29,23 @@ export default function EditablePage(props: IEditablePage) {
         {
           Array(count).fill(1).map((_, index) => {
             return (
-              <Card attribute={props.attribute} attributeName="Meio Orc">
-                <div style={styles.statsMinusAndPlus}>
-                  <Button
-                    btntype="minus"
-                    title={`Excluir ${props.attribute}`}
-                    onClick={() => { setCount(count - 1) }}
-                  />
+              <Card key={index} attribute={props.attribute} attributeName="Meio Orc" /> 
+              // <Card attribute={props.attribute} attributeName="Meio Orc">
+              //   <div style={styles.statsMinusAndPlus}>
+              //     <Button
+              //       btntype="minus"
+              //       title={`Excluir ${props.attribute}`}
+              //       onClick={() => { setCount(count - 1) }}
+              //     />
 
-                  <Button
-                    onClick={() => { postClass({  }) }}
-                    type="submit"
-                    btntype="save"
-                    title={`Salvar nova ${props.attribute}`}
-                  />
-                </div>
-              </Card>
+              //     <Button
+              //       onClick={() => { postClass({}) }}
+              //       type="submit"
+              //       btntype="save"
+              //       title={`Salvar nova ${props.attribute}`}
+              //     />
+              //   </div>
+              // </Card>
             )
           })
         }
@@ -70,6 +73,14 @@ export function Card(props: ICard) {
       setFilePath(URL.createObjectURL(acceptedFiles[0]))
     }
   });
+  const formik = useFormik({
+    initialValues: {
+      ...initialValues,
+      img: filePath
+    },
+    validationSchema,
+    onSubmit: () => { console.log(formik.values) }
+  })
 
   return (
     <MUICard sx={{ maxWidth: 150, marginBottom: 1, marginTop: 1 }}>
@@ -96,52 +107,62 @@ export function Card(props: ICard) {
             </div>
           </CardActionArea>
         ) : (
-          <CardActionArea>
-            <input {...getInputProps()} />
-            <CardMedia
-              component="img"
-              height="140"
-              src={filePath !== 'Imagemx.jpg' ? filePath : defaultPhoto}
-              alt="foto do personagem"
-              onClick={open}
-            />
-            <CardContent>
-              <TextField
-                required
-                id="attributeName"
-                label={`Nome da ${props.attribute}`}
-                variant="standard"
-                margin="normal"
-                fullWidth
+          <form noValidate onSubmit={formik.handleSubmit}>
+            <CardActionArea>
+              <input
+                {...getInputProps()}
+                id="img"
+                onChange={formik.handleChange}
               />
-
-              <TextField
-                required
-                id="description"
-                label="Descrição"
-                variant="standard"
-                margin="normal"
-                fullWidth
+              <CardMedia
+                component="img"
+                height="140"
+                src={filePath !== 'Imagemx.jpg' ? filePath : defaultPhoto}
+                alt="foto do personagem"
+                onClick={open}
               />
-
-              <div style={styles.statsMinusAndPlus}>
-                <Button
-                  btntype="minus"
-                  title={`Excluir ${props.attribute}`}
-                  onClick={() => { }}
+              <CardContent>
+                <TextField
+                  required
+                  id="name"
+                  label={`Nome da ${props.attribute}`}
+                  variant="standard"
+                  margin="normal"
+                  fullWidth
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
                 />
-
-                <Button
-                  onClick={() => { }}
-                  type="submit"
-                  btntype="save"
-                  title={`Salvar nova ${props.attribute}`}
+                <TextField
+                  required
+                  id="description"
+                  label="Descrição"
+                  variant="standard"
+                  margin="normal"
+                  fullWidth
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                  error={formik.touched.description && Boolean(formik.errors.description)}
+                  helperText={formik.touched.description && formik.errors.description}
                 />
-              </div>
-
-              {props.children}
-            </CardContent>
-          </CardActionArea>
+                <div style={styles.statsMinusAndPlus}>
+                  <Button
+                    btntype="minus"
+                    title={`Excluir ${props.attribute}`}
+                    onClick={() => { }}
+                  />
+                  <Button
+                    onClick={() => { }}
+                    type="submit"
+                    btntype="save"
+                    title={`Salvar nova ${props.attribute}`}
+                  />
+                </div>
+                {props.children}
+              </CardContent>
+            </CardActionArea>
+          </form>
         )
       }
     </MUICard>
