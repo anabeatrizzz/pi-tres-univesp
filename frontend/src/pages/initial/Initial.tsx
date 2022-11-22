@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Wrapper from "../../components/wrapper/Wrapper";
 import { getNews, postNews } from "../../services/initial";
 import Card from "../../components/card";
-import { getUsers } from "../../services/users";
 import Button from "../../components/button";
 
 interface INews {
@@ -27,8 +26,6 @@ export default function Initial() {
     getNews.then((news: any) => {
       setNews(news)
     })
-
-    getUsers.then((users: any) => { })
   }, [])
 
   return (

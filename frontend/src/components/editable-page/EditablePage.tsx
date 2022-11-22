@@ -13,6 +13,7 @@ import { validationSchema, initialValues } from "../../formik/Classes";
 interface IEditablePage {
   pageTitle: string;
   attribute: string;
+  postEndpoint?: Function;
 }
 
 export default function EditablePage(props: IEditablePage) {
@@ -29,23 +30,7 @@ export default function EditablePage(props: IEditablePage) {
         {
           Array(count).fill(1).map((_, index) => {
             return (
-              <Card key={index} attribute={props.attribute} attributeName="Meio Orc" /> 
-              // <Card attribute={props.attribute} attributeName="Meio Orc">
-              //   <div style={styles.statsMinusAndPlus}>
-              //     <Button
-              //       btntype="minus"
-              //       title={`Excluir ${props.attribute}`}
-              //       onClick={() => { setCount(count - 1) }}
-              //     />
-
-              //     <Button
-              //       onClick={() => { postClass({}) }}
-              //       type="submit"
-              //       btntype="save"
-              //       title={`Salvar nova ${props.attribute}`}
-              //     />
-              //   </div>
-              // </Card>
+              <Card postEndpoint={props.postEndpoint} key={index} attribute={props.attribute} attributeName="Meio Orc" />
             )
           })
         }
@@ -59,6 +44,7 @@ interface ICard {
   attribute: string;
   children?: any;
   editable?: boolean;
+  postEndpoint?: Function;
 }
 
 export function Card(props: ICard) {
@@ -111,8 +97,6 @@ export function Card(props: ICard) {
             <CardActionArea>
               <input
                 {...getInputProps()}
-                id="img"
-                onChange={formik.handleChange}
               />
               <CardMedia
                 component="img"
@@ -153,7 +137,14 @@ export function Card(props: ICard) {
                     onClick={() => { }}
                   />
                   <Button
-                    onClick={() => { }}
+                    onClick={() => {
+                      if(props.postEndpoint){
+                        props.postEndpoint({
+                          nome: formik.values.name,
+                          descricao: formik.values.description
+                        })
+                      }
+                    }}
                     type="submit"
                     btntype="save"
                     title={`Salvar nova ${props.attribute}`}
