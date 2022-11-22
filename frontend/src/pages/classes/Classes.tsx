@@ -1,28 +1,9 @@
-import { Typography, CardContent } from "@mui/material";
 import React from "react";
-import Wrapper from "../../components/wrapper";
-import { Card } from "../characters"
-import styles from "./Classes.css"
+import EditablePage from "../../components/editable-page/EditablePage";
+import { postClass } from "../../services/classes"
 
 export default function Classes() {
   return (
-    <Wrapper paperComponent title="CLASSES">
-      <div style={styles.classesContainer}>
-      {
-        Array(4).fill(1).map((_, index) => {
-          return (
-            <Card characterName="Gurreiro">
-              <CardContent>
-                <Typography variant="subtitle1" color="text.secondary" component="p">
-                  Descrição
-                </Typography>
-              </CardContent>
-            </Card>
-          )
-        })
-      }
-      </div>
-
-    </Wrapper>
+    <EditablePage postEndpoint={postClass} pageTitle="CLASSES" attribute="classe" />
   )
 }
