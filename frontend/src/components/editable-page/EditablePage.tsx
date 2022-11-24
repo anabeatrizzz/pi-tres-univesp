@@ -9,34 +9,99 @@ import { Edit } from "@mui/icons-material";
 import { postClass } from "../../services/classes";
 import { useFormik } from 'formik';
 import { validationSchema, initialValues } from "../../formik/Classes";
+import { Link } from "react-router-dom";
 
 interface IEditablePage {
   pageTitle: string;
   attribute: string;
   postEndpoint?: Function;
+  wrapper?: boolean;
+  children?: any;
 }
 
 export default function EditablePage(props: IEditablePage) {
   const [count, setCount] = useState(2);
 
-  return (
-    <Wrapper paperComponent title={props.pageTitle}>
-      <Button
-        btntype="plus"
-        onClick={() => { setCount(count + 1) }}
-        title={`Adicionar ${props.attribute}`}
-      />
-      <div style={styles.racesContainer}>
-        {
-          Array(count).fill(1).map((_, index) => {
-            return (
-              <Card postEndpoint={props.postEndpoint} key={index} attribute={props.attribute} attributeName="Meio Orc" />
-            )
-          })
-        }
-      </div>
-    </Wrapper>
-  )
+  if (props.wrapper) {
+    return (
+      <Wrapper paperComponent title={props.pageTitle}>
+        <Button
+          btntype="plus"
+          onClick={() => { setCount(count + 1) }}
+          title={`Adicionar ${props.attribute}`}
+        />
+        <div style={styles.racesContainer}>
+          {
+            Array(count).fill(1).map((_, index) => {
+              return (
+                <Card postEndpoint={props.postEndpoint} key={index} attribute={props.attribute} attributeName="Meio Orc" />
+              )
+            })
+          }
+        </div>
+        {props.children}
+      </Wrapper>
+    )
+  } else {
+    return (
+      <>
+        <Button
+          btntype="plus"
+          onClick={() => { setCount(count + 1) }}
+          title={`Adicionar ${props.attribute}`}
+        />
+        <div style={styles.racesContainer}>
+          {
+            Array(count).fill(1).map((_, index) => {
+              if (props.attribute === "personagem" || props.attribute === "npc") {
+                let linkTo = props.attribute === "personagem" ? `/personagens/personagem${index + 1}` : `/personagens/npc${index + 1}`
+                return (
+                  <Link
+                    state={{
+                      type: props.attribute === "personagem" ? "character" : "npc"
+                    }}
+                    style={styles.link}
+                    to={linkTo}
+                  >
+                    <Card attribute={props.attribute} attributeName={`${props.attribute}${index + 1}`} />
+                  </Link>
+                )
+              } else {
+                return (
+                  <Card postEndpoint={props.postEndpoint} key={index} attribute={props.attribute} attributeName="Meio Orc" />
+                )
+              }
+
+            })
+          }
+        </div>
+        {props.children}
+      </>
+    )
+  }
+
+  // return (
+  //   <Wrapper paperComponent title={props.pageTitle}>
+  //     <Button
+  //       btntype="plus"
+  //       onClick={() => { setCount(count + 1) }}
+  //       title={`Adicionar ${props.attribute}`}
+  //     />
+  //     <div style={styles.racesContainer}>
+  //       {
+  //         Array(count).fill(1).map((_, index) => {
+  //           return (
+  //             <Card postEndpoint={props.postEndpoint} key={index} attribute={props.attribute} attributeName="Meio Orc" />
+  //           )
+  //         })
+  //       }
+  //     </div>
+  //   </Wrapper>
+  // )
+}
+
+EditablePage.defaultProps = {
+  wrapper: true
 }
 
 interface ICard {
@@ -84,13 +149,26 @@ export function Card(props: ICard) {
                 {props.attributeName}
               </Typography>
 
-              <Typography variant="subtitle1" color="text.secondary" component="p">
-                Descrição
-              </Typography>
+              {
+                props.attribute !== "personagem" && props.attribute !== "npc" ? (
+                  <Typography variant="subtitle1" color="text.secondary" component="p">
+                    Descrição
+                  </Typography>
+                ) : (
+                  <></>
+                )
+              }
             </CardContent>
-            <div onClick={() => setIsEditable(true)} style={styles.editIconDiv}>
-              <Edit />
-            </div>
+            {
+              props.attribute !== "personagem" && props.attribute !== "npc" ? (
+                <div onClick={() => setIsEditable(true)} style={styles.editIconDiv}>
+                  <Edit />
+                </div>
+              ) : (
+                <></>
+              )
+            }
+
           </CardActionArea>
         ) : (
           <form noValidate onSubmit={formik.handleSubmit}>
@@ -109,7 +187,7 @@ export function Card(props: ICard) {
                 <TextField
                   required
                   id="name"
-                  label={`Nome da ${props.attribute}`}
+                  label={`Nome ${props.attribute}`}
                   variant="standard"
                   margin="normal"
                   fullWidth
@@ -138,7 +216,7 @@ export function Card(props: ICard) {
                   />
                   <Button
                     onClick={() => {
-                      if(props.postEndpoint){
+                      if (props.postEndpoint) {
                         props.postEndpoint({
                           nome: formik.values.name,
                           descricao: formik.values.description
@@ -147,7 +225,7 @@ export function Card(props: ICard) {
                     }}
                     type="submit"
                     btntype="save"
-                    title={`Salvar nova ${props.attribute}`}
+                    title={`Salvar ${props.attribute}`}
                   />
                 </div>
                 {props.children}
