@@ -79,25 +79,6 @@ export default function EditablePage(props: IEditablePage) {
       </>
     )
   }
-
-  // return (
-  //   <Wrapper paperComponent title={props.pageTitle}>
-  //     <Button
-  //       btntype="plus"
-  //       onClick={() => { setCount(count + 1) }}
-  //       title={`Adicionar ${props.attribute}`}
-  //     />
-  //     <div style={styles.racesContainer}>
-  //       {
-  //         Array(count).fill(1).map((_, index) => {
-  //           return (
-  //             <Card postEndpoint={props.postEndpoint} key={index} attribute={props.attribute} attributeName="Meio Orc" />
-  //           )
-  //         })
-  //       }
-  //     </div>
-  //   </Wrapper>
-  // )
 }
 
 EditablePage.defaultProps = {
