@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import Wrapper from "../../components/wrapper";
 import { Link, useParams } from 'react-router-dom';
-import { CardContent, Typography, LinearProgress, Card as MUICard, Box, Button, Divider } from "@mui/material";
+import { CardContent, Typography, LinearProgress, Card as MUICard, Box, Button as MUIButton, Divider, TextField } from "@mui/material";
 import defaultProfile from "../../assets/user-profile-photo.jpg";
 import styles from "./Character.css"
 import { ROUTES } from "../../navigation/siteRoutes";
 import { useLocation } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
+import Button from "../../components/button";
 
 export default function Character() {
   const [filePath, setFilePath] = useState('Imagemx.jpg')
   const params = useParams();
   const location = useLocation();
-  const characterType = location.state.type
+  const characterType = location.state.type;
+  const [isEditable, setIsEditable] = useState(false);
 
   const { acceptedFiles, getRootProps, getInputProps, open } = useDropzone({
     accept: {
@@ -179,16 +181,16 @@ export default function Character() {
             characterType != "npc" ? (
               <div style={styles.particularsDiv}>
                 <Typography variant="subtitle1">
-                  Idade: número
+                  <strong>Idade:</strong> número
                 </Typography>
                 <Typography variant="subtitle1">
-                  Nível: número
+                  <strong>Nível:</strong> número
                 </Typography>
                 <Typography variant="subtitle1">
-                  Raça: string
+                  <strong>Raça:</strong> string
                 </Typography>
                 <Typography variant="subtitle1">
-                  Classe: string
+                  <strong>Classe:</strong> string
                 </Typography>
               </div>
             ) : (
@@ -221,7 +223,22 @@ export default function Character() {
                       color={"primary"}
                       value={thing.amount}
                     />
-                    <Typography>{thing.amount} / 100</Typography>
+                    {
+                      !isEditable ? (
+                        <Typography>{thing.amount} / 100</Typography>
+                      ) : (
+                        <Typography>
+                          <TextField
+                            type="number"
+                            style={{ width: 35 }}
+                            required
+                            id={thing.name}
+                            variant="standard"
+                            margin="normal" /> / 100
+                        </Typography>
+                      )
+                    }
+                    
                   </div>
                 ))
               ) : (
@@ -240,6 +257,7 @@ export default function Character() {
               )
             }
           </div>
+          <Button onClick={() => { setIsEditable(true) }} btntype="edit" />
         </div>
       </CardContent>
       {
@@ -293,11 +311,11 @@ export default function Character() {
 
               </div>
               <div style={styles.createEquipmentDiv}>
-                <Button variant="contained" style={styles.btn} size="small">
+                <MUIButton variant="contained" style={styles.btn} size="small">
                   <Link style={styles.link} to={ROUTES.CREATE_EQUIPMENT}>
                     Criar equipamento
                   </Link>
-                </Button>
+                </MUIButton>
               </div>
             </CardContent>
           </>

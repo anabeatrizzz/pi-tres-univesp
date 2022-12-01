@@ -1,6 +1,7 @@
 import React from "react";
 import { Button as MUIButton, ButtonProps, Typography } from "@mui/material";
 import styles from "./Button.css";
+import { Edit } from "@mui/icons-material";
 
 interface IButton extends ButtonProps {
   btntype?: "plus" | "minus" | "normal" | "save" | "edit";
@@ -31,7 +32,7 @@ export default function Button(props: IButton){
           <Typography style={styles.btnSave}>Salvar</Typography>
         ) :
         props.btntype === "edit" ? (
-          <Typography style={styles.btnSave}>Editar</Typography>
+          <Typography style={styles.btnSave}><Edit /></Typography>
         ) : props.children
       }
     </MUIButton>
