@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Wrapper from "../../components/wrapper/Wrapper";
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import styles from "./Initial.css"
-import { getNews } from "../../services/initial";
+import { getNews, postNews } from "../../services/initial";
 import Card from "../../components/card";
+import Button from "../../components/button";
 
 interface INews {
   id: number;
@@ -12,27 +10,52 @@ interface INews {
   descricao: string;
 }
 
-export default function Initial(){
+export default function Initial() {
   const [news, setNews] = useState<INews[]>([])
+  const [count, setCount] = useState(0);
+
+  function post() {
+    postNews({
+      titulo: "teste",
+      descricao: "teste",
+      //autor: "teste"
+    })
+  }
 
   useEffect(() => {
     getNews.then((news: any) => {
-      console.log(news)
       setNews(news)
     })
   }, [])
 
-  return(
-    <Wrapper>
-      <Paper style={styles.paper} square elevation={0}>
-        <Typography gutterBottom variant="h4" style={styles.headingFour}>NOVIDADES</Typography>
+  return (
+    <Wrapper paperComponent title="NOVIDADES">
+      <Button
+        onClick={() => { setCount(count + 1) }}
+        style={{ marginBottom: 10 }}
+        btntype="plus"
+        title="Adicionar notícia"
+      />
 
-        {
-          news.map((singleNews) => (
-            <Card key={singleNews.id} title={singleNews.titulo} description={singleNews.descricao} />
-          ))
-        }
-      </Paper>
+      {
+        Array(count).fill(1).map((_, index) => (
+          <Card
+            editable
+            key={index}
+            onClick={() => post()}
+          />
+        ))
+      }
+
+      {
+        news.map((singleNews) => (
+          <Card
+            key={singleNews.id}
+            title={singleNews.titulo}
+            description={singleNews.descricao}
+          />
+        ))
+      }
     </Wrapper>
   )
 }

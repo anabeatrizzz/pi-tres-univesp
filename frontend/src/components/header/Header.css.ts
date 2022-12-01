@@ -56,7 +56,7 @@ const styles = {
   },
 
   characterBackgroundImg: {
-    width: "35%",
+    width: "25%",
     zIndex: 1,
     position: "fixed" as "fixed",
     top: 0
@@ -81,9 +81,12 @@ const styles = {
   firstImgLink: {
     justifyContent: "flex-start",
     display: "flex"
+  },
+
+  link: {
+    textDecoration: 'none',
+    color: 'black',
   }
-
-
 }
 
 export default styles;
