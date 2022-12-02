@@ -1,9 +1,7 @@
 import api from "./api";
 
 const getNews = api.get("/novidades")
-  .then((data) => {
-    return data.data
-  })
+  .then(data => { return data.data })
 
 function postNews(data: any){
   api.post("/novidades", data)

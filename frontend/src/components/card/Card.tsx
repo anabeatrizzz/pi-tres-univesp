@@ -13,6 +13,9 @@ import Typography from '@mui/material/Typography';
 import colors from "../colors";
 import styles from "./Card.css"
 import Button from "../button";
+import { useFormik } from 'formik';
+import { initialValues, validationSchema } from "../../formik/Initial";
+import { postNews } from "../../services/initial";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -34,6 +37,7 @@ interface ICard {
   title?: string;
   editable?: boolean;
   onClick?: () => void;
+  id: number;
 }
 
 export default function Card(props: ICard) {
@@ -43,6 +47,19 @@ export default function Card(props: ICard) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema,
+    onSubmit: () => {
+      postNews({
+        titulo: formik.values.title,
+        descricao: formik.values.description
+      })
+
+      window.location.reload();
+    }
+  })
 
   return (
     <MUICard style={styles.card} sx={{ maxWidth: 590 }}>
@@ -89,46 +106,47 @@ export default function Card(props: ICard) {
           </>
         ) : (
           <>
-            <CardHeader
-              title={
+            <form noValidate onSubmit={formik.handleSubmit}>
+              <CardHeader
+                title={
+                  <TextField
+                    required
+                    id="title"
+                    label="Título"
+                    variant="standard"
+                    margin="normal"
+                    fullWidth
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
+                    error={formik.touched.title && Boolean(formik.errors.title)}
+                    helperText={formik.touched.title && formik.errors.title}
+                  />
+                }
+                titleTypographyProps={{
+                  variant: "h6"
+                }}
+              />
+              <CardContent>
                 <TextField
                   required
-                  id="title"
-                  label="Título"
+                  id="description"
+                  label="Descrição"
                   variant="standard"
                   margin="normal"
+                  multiline
                   fullWidth
+                  minRows={3}
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                  error={formik.touched.description && Boolean(formik.errors.description)}
+                  helperText={formik.touched.description && formik.errors.description}
                 />
-              }
-              titleTypographyProps={{
-                variant: "h6"
-              }}
-            />
-            <CardContent>
-              <TextField
-                required
-                id="description"
-                label="Descrição"
-                variant="standard"
-                margin="normal"
-                multiline
-                fullWidth
-                minRows={3}
-              />
-            </CardContent>
-            <CardActions style={{ justifyContent: "space-between" }} disableSpacing>
-              <Button btntype="minus" />
-              <Button onClick={() => {
-                if(props.onClick !== undefined){
-                  props.onClick()
-                } else {
-                  return
-                }
-              }}
-              
-              btntype="save"
-              />
-            </CardActions>
+              </CardContent>
+              <CardActions style={{ justifyContent: "space-between" }} disableSpacing>
+                <Button btntype="minus" onClick={() => console.log(props.id)} />
+                <Button btntype="save" type="submit" />
+              </CardActions>
+            </form>
           </>
         )
       }
