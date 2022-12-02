@@ -30,6 +30,16 @@ export default function Initial() {
       />
 
       {
+        Array(count).fill(1).map((_, index) => (
+          <Card
+            editable
+            key={index}
+            id={0}
+          />
+        ))
+      }
+
+      {
         news.map((singleNews) => (
           <Card
             key={singleNews.id}

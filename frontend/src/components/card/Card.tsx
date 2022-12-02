@@ -8,6 +8,7 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import Edit from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom";
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import colors from "../colors";
@@ -15,7 +16,7 @@ import styles from "./Card.css"
 import Button from "../button";
 import { useFormik } from 'formik';
 import { initialValues, validationSchema } from "../../formik/Initial";
-import { postNews } from "../../services/initial";
+import { postNews, deleteNews } from "../../services/initial";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -43,6 +44,7 @@ interface ICard {
 export default function Card(props: ICard) {
   const [expanded, setExpanded] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
+  const navigate = useNavigate();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -57,7 +59,10 @@ export default function Card(props: ICard) {
         descricao: formik.values.description
       })
 
-      window.location.reload();
+      navigate("/")
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000)
     }
   })
 
@@ -143,7 +148,14 @@ export default function Card(props: ICard) {
                 />
               </CardContent>
               <CardActions style={{ justifyContent: "space-between" }} disableSpacing>
-                <Button btntype="minus" onClick={() => console.log(props.id)} />
+                <Button btntype="minus" onClick={() => {
+                  deleteNews(props.id)
+                  navigate("/")
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 2000)
+                  
+                }} />
                 <Button btntype="save" type="submit" />
               </CardActions>
             </form>

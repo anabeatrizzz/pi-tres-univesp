@@ -9,7 +9,14 @@ function postNews(data: any){
     .catch(error => console.log(error))
 }
 
+function deleteNews(id: number){
+  api.delete(`/novidade/${id}`)
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+}
+
 export {
   getNews,
-  postNews
+  postNews,
+  deleteNews
 }
