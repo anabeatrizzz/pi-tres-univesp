@@ -16,7 +16,7 @@ import styles from "./Card.css"
 import Button from "../button";
 import { useFormik } from 'formik';
 import { initialValues, validationSchema } from "../../formik/Initial";
-import { postNews, deleteNews } from "../../services/initial";
+import { postNews, deleteNews, putNews } from "../../services/initial";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -54,11 +54,19 @@ export default function Card(props: ICard) {
     initialValues: initialValues,
     validationSchema,
     onSubmit: () => {
-      postNews({
+      if(isEditable){
+        putNews({
+          id: props.id,
+          titulo: formik.values.title,
+        descricao: formik.values.description
+        })
+      } else {
+        postNews({
         titulo: formik.values.title,
         descricao: formik.values.description
       })
-
+      }
+      
       navigate("/")
       setTimeout(() => {
         window.location.reload();
