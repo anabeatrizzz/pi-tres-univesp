@@ -15,6 +15,8 @@ import Characters from "./pages/characters";
 import Character from "./pages/character";
 import Classes from "./pages/classes";
 import CreateEquipment from "./pages/create-equipment";
+import Wrapper from "./components/wrapper";
+import { Typography } from '@mui/material';
 import { ROUTES } from "./navigation/siteRoutes";
 import reportWebVitals from './reportWebVitals';
 import {
@@ -78,8 +80,18 @@ const router = createBrowserRouter([
   {
     path: ROUTES.CLASSES,
     element: <Classes />
+  },
+  {
+    path: "*",
+    element: <DefaultPage />
   }
 ]);
+
+function DefaultPage() {
+  return (
+    <Wrapper paperComponent title="Em construção" />
+  )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
