@@ -8,11 +8,15 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import Edit from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom";
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import colors from "../colors";
 import styles from "./Card.css"
 import Button from "../button";
+import { useFormik } from 'formik';
+import { initialValues, validationSchema } from "../../formik/Initial";
+import { postNews, deleteNews, putNews } from "../../services/initial";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -34,15 +38,41 @@ interface ICard {
   title?: string;
   editable?: boolean;
   onClick?: () => void;
+  id: number;
 }
 
 export default function Card(props: ICard) {
   const [expanded, setExpanded] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
+  const navigate = useNavigate();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema,
+    onSubmit: () => {
+      if(isEditable){
+        putNews({
+          id: props.id,
+          titulo: formik.values.title,
+        descricao: formik.values.description
+        })
+      } else {
+        postNews({
+        titulo: formik.values.title,
+        descricao: formik.values.description
+      })
+      }
+      
+      navigate("/")
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000)
+    }
+  })
 
   return (
     <MUICard style={styles.card} sx={{ maxWidth: 590 }}>
@@ -89,46 +119,54 @@ export default function Card(props: ICard) {
           </>
         ) : (
           <>
-            <CardHeader
-              title={
+            <form noValidate onSubmit={formik.handleSubmit}>
+              <CardHeader
+                title={
+                  <TextField
+                    required
+                    id="title"
+                    label="Título"
+                    variant="standard"
+                    margin="normal"
+                    fullWidth
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
+                    error={formik.touched.title && Boolean(formik.errors.title)}
+                    helperText={formik.touched.title && formik.errors.title}
+                  />
+                }
+                titleTypographyProps={{
+                  variant: "h6"
+                }}
+              />
+              <CardContent>
                 <TextField
                   required
-                  id="title"
-                  label="Título"
+                  id="description"
+                  label="Descrição"
                   variant="standard"
                   margin="normal"
+                  multiline
                   fullWidth
+                  minRows={3}
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                  error={formik.touched.description && Boolean(formik.errors.description)}
+                  helperText={formik.touched.description && formik.errors.description}
                 />
-              }
-              titleTypographyProps={{
-                variant: "h6"
-              }}
-            />
-            <CardContent>
-              <TextField
-                required
-                id="description"
-                label="Descrição"
-                variant="standard"
-                margin="normal"
-                multiline
-                fullWidth
-                minRows={3}
-              />
-            </CardContent>
-            <CardActions style={{ justifyContent: "space-between" }} disableSpacing>
-              <Button btntype="minus" />
-              <Button onClick={() => {
-                if(props.onClick !== undefined){
-                  props.onClick()
-                } else {
-                  return
-                }
-              }}
-              
-              btntype="save"
-              />
-            </CardActions>
+              </CardContent>
+              <CardActions style={{ justifyContent: "space-between" }} disableSpacing>
+                <Button btntype="minus" onClick={() => {
+                  deleteNews(props.id)
+                  navigate("/")
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 2000)
+                  
+                }} />
+                <Button btntype="save" type="submit" />
+              </CardActions>
+            </form>
           </>
         )
       }
