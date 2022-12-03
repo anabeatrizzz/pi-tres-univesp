@@ -19,7 +19,6 @@ app.get("/novidade/:id",(req,res) => {
     if(isNaN(req.params.id)){
         return res.sendStatus(404);
      }
-
      let id = parseInt(req.params.id);
      novidades.findOne({where:{id:id}}).then(novidade => {
         res.json(novidade);
