@@ -16,7 +16,6 @@ import Character from "./pages/character";
 import Classes from "./pages/classes";
 import CreateEquipment from "./pages/create-equipment";
 import Wrapper from "./components/wrapper";
-import { Typography } from '@mui/material';
 import { ROUTES } from "./navigation/siteRoutes";
 import reportWebVitals from './reportWebVitals';
 import {

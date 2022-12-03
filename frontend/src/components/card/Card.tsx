@@ -16,7 +16,7 @@ import styles from "./Card.css"
 import Button from "../button";
 import { useFormik } from 'formik';
 import { initialValues, validationSchema } from "../../formik/Initial";
-import { postNews, deleteNews, putNews } from "../../services/initial";
+import { postNews, deleteNews, putNews, getOneNews } from "../../services/initial";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -88,7 +88,22 @@ export default function Card(props: ICard) {
                 </Avatar>
               }
               action={
-                <IconButton onClick={() => setIsEditable(true) } aria-label="edit">
+                <IconButton
+                  aria-label="edit"
+                  onClick={() => {
+                    setIsEditable(true)
+                    getOneNews(props.id)
+                      .then((data) => {
+                        if(props.id === data.id){
+                          formik.setValues({
+                            ...formik.values,
+                            title: data.titulo,
+                            description: data.descricao
+                          })
+                        }
+                      })
+                  }}
+                >
                   <Edit />
                 </IconButton>
               }

@@ -6,7 +6,6 @@ import styles from "./EditablePage.css";
 import { Card as MUICard, CardContent, Typography, CardMedia, CardActionArea, TextField } from "@mui/material";
 import defaultPhoto from "../../assets/user-profile-photo.jpg";
 import { Edit } from "@mui/icons-material";
-import { postClass } from "../../services/classes";
 import { useFormik } from 'formik';
 import { validationSchema, initialValues } from "../../formik/Classes";
 import { Link } from "react-router-dom";

@@ -3,6 +3,10 @@ import api from "./api";
 const getNews = api.get("/novidades")
   .then(data => { return data.data })
 
+const getOneNews = (id: number) => api.get(`/novidade/${id}`)
+  .then(data => { return data.data })
+  .catch(error => console.log(error))
+
 function postNews(data: any) {
   api.post("/novidades", data)
     .then(data => console.log(data))
@@ -23,6 +27,7 @@ function putNews(data: any) {
 
 export {
   getNews,
+  getOneNews,
   postNews,
   deleteNews,
   putNews
